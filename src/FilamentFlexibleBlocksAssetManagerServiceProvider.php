@@ -1,6 +1,6 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Statikbe\FilamentFlexibleBlocksAssetManager;
 
 use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
@@ -13,14 +13,13 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use VendorName\Skeleton\Commands\SkeletonCommand;
-use VendorName\Skeleton\Testing\TestsSkeleton;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Testing\TestsLaravelFilamentFlexibleBlocksAssetManager;
 
-class SkeletonServiceProvider extends PackageServiceProvider
+class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServiceProvider
 {
-    public static string $name = 'skeleton';
+    public static string $name = 'laravel-filament-flexible-blocks-asset-manager';
 
-    public static string $viewNamespace = 'skeleton';
+    public static string $viewNamespace = 'laravel-filament-flexible-blocks-asset-manager';
 
     public function configurePackage(Package $package): void
     {
@@ -30,13 +29,12 @@ class SkeletonServiceProvider extends PackageServiceProvider
          * More info: https://github.com/spatie/laravel-package-tools
          */
         $package->name(static::$name)
-            ->hasCommands($this->getCommands())
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()
                     ->publishMigrations()
                     ->askToRunMigrations()
-                    ->askToStarRepoOnGitHub(':vendor_slug/:package_slug');
+                    ->askToStarRepoOnGitHub('statikbe/laravel-filament-flexible-blocks-asset-manager');
             });
 
         $configFileName = $package->shortName();
@@ -80,18 +78,18 @@ class SkeletonServiceProvider extends PackageServiceProvider
         if (app()->runningInConsole()) {
             foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
-                    $file->getRealPath() => base_path("stubs/skeleton/{$file->getFilename()}"),
-                ], 'skeleton-stubs');
+                    $file->getRealPath() => base_path("stubs/laravel-filament-flexible-blocks-asset-manager/{$file->getFilename()}"),
+                ], 'laravel-filament-flexible-blocks-asset-manager-stubs');
             }
         }
 
         // Testing
-        Testable::mixin(new TestsSkeleton());
+        Testable::mixin(new TestsLaravelFilamentFlexibleBlocksAssetManager());
     }
 
     protected function getAssetPackageName(): ?string
     {
-        return ':vendor_slug/:package_slug';
+        return 'statikbe/laravel-filament-flexible-blocks-asset-manager';
     }
 
     /**
@@ -100,9 +98,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getAssets(): array
     {
         return [
-            // AlpineComponent::make('skeleton', __DIR__ . '/../resources/dist/components/skeleton.js'),
-            Css::make('skeleton-styles', __DIR__ . '/../resources/dist/skeleton.css'),
-            Js::make('skeleton-scripts', __DIR__ . '/../resources/dist/skeleton.js'),
+            // AlpineComponent::make('laravel-filament-flexible-blocks-asset-manager', __DIR__ . '/../resources/dist/components/laravel-filament-flexible-blocks-asset-manager.js'),
+            Css::make('laravel-filament-flexible-blocks-asset-manager-styles', __DIR__ . '/../resources/dist/laravel-filament-flexible-blocks-asset-manager.css'),
+            Js::make('laravel-filament-flexible-blocks-asset-manager-scripts', __DIR__ . '/../resources/dist/laravel-filament-flexible-blocks-asset-manager.js'),
         ];
     }
 
@@ -112,7 +110,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getCommands(): array
     {
         return [
-            SkeletonCommand::class,
+
         ];
     }
 
@@ -121,7 +119,9 @@ class SkeletonServiceProvider extends PackageServiceProvider
      */
     protected function getIcons(): array
     {
-        return [];
+        return [
+            'heroicon-o-photo'
+        ];
     }
 
     /**
@@ -146,7 +146,7 @@ class SkeletonServiceProvider extends PackageServiceProvider
     protected function getMigrations(): array
     {
         return [
-            'create_skeleton_table',
+            'create_assets_table',
         ];
     }
 }

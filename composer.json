@@ -1,29 +1,27 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "statikbe/laravel-filament-flexible-blocks-asset-manager",
+    "description": "A simple document and image manager for the Filament Flexible Blocks package.",
     "keywords": [
-        ":vendor_name",
+        "Statik.be",
         "laravel",
-        ":package_slug"
+        "laravel-filament-flexible-blocks-asset-manager"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/statik-be/laravel-filament-flexible-blocks-asset-manager",
     "support": {
-        "issues": "https://github.com/:vendor_slug/:package_slug/issues",
-        "source": "https://github.com/:vendor_slug/:package_slug"
+        "issues": "https://github.com/statik-be/laravel-filament-flexible-blocks-asset-manager/issues",
+        "source": "https://github.com/statik-be/laravel-filament-flexible-blocks-asset-manager"
     },
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Sten Govaerts",
+            "email": "sten.govaerts@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
         "filament/filament": "^3.0",
-        "filament/forms": "^3.0",
-        "filament/tables": "^3.0",
         "spatie/laravel-package-tools": "^1.15.0"
     },
     "require-dev": {
@@ -36,18 +34,17 @@
         "pestphp/pest-plugin-laravel": "^2.0",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0",
-        "spatie/laravel-ray": "^1.26"
+        "phpstan/phpstan-phpunit": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "Statikbe\\FilamentFlexibleBlocksAssetManager\\": "src/",
+            "Statikbe\\FilamentFlexibleBlocksAssetManager\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "Statikbe\\FilamentFlexibleBlocksAssetManager\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -67,10 +64,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+              "Statikbe\\FilamentFlexibleBlocksAssetManager\\FilamentFlexibleBlocksAssetManagerServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "FilamentFlexibleBlocksAssetManager": "Statikbe\\FilamentFlexibleBlocksAssetManager\\Facades\\FilamentFlexibleBlocksAssetManager"
             }
         }
     },

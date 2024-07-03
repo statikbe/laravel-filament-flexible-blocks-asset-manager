@@ -1,20 +1,23 @@
 <?php
 
-namespace VendorName\Skeleton;
+namespace Statikbe\FilamentFlexibleBlocksAssetManager;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource;
 
-class SkeletonPlugin implements Plugin
+class FilamentFlexibleBlocksAssetManagerPlugin implements Plugin
 {
     public function getId(): string
     {
-        return 'skeleton';
+        return 'laravel-filament-flexible-blocks-asset-manager';
     }
 
     public function register(Panel $panel): void
     {
-        //
+        $panel->resources([
+            AssetResource::class
+        ]);
     }
 
     public function boot(Panel $panel): void
