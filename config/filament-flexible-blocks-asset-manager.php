@@ -2,8 +2,22 @@
 
 // config for Statik/FilamentFlexibleBlocksAssetManager
 return [
+    /*
+    |--------------------------------------------------------------------------
+    | Translatable assets
+    |--------------------------------------------------------------------------
+    |
+    | Allows to translate the assets in different languages.
+    */
     'translatable_assets' => true,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Navigation group
+    |--------------------------------------------------------------------------
+    |
+    | Sets the navigation group label to which the assets table is added.
+    */
     'navigation_group' => null,
 
     /*
@@ -43,10 +57,46 @@ return [
         //'application/pdf'
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Storage disk
+    |--------------------------------------------------------------------------
+    |
+    | The file system disk in which the assets will be stored.
+    */
     'storage_disk' => null,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Storage directory
+    |--------------------------------------------------------------------------
+    |
+    | The directory on the file system disk in which the assets will be stored.
+    */
     'storage_directory' => null,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Storage visibility
+    |--------------------------------------------------------------------------
+    |
+    | The visibility of the assets, see Spatie Medialibrary docs.
+    */
     'storage_visibility' => 'public',
 
+    /*
+    |--------------------------------------------------------------------------
+    | Asset authorisation
+    |--------------------------------------------------------------------------
+    |
+    | The assets URLs can be protected. This can be done in different ways:
+    | 1. a gate, see https://laravel.com/docs/11.x/authorization#gates
+    |    You can define a gate that takes the asset record as argument.
+    | 2. a policy, see https://laravel.com/docs/11.x/authorization#writing-policies
+    |    You can write a policy for the Asset model. The `view` policy will be used to authorise.
+    */
+    'asset_authorisation' => [
+        //'gate' => 'asset-access',
+        //'policy' => AssetPolicy::class,
+    ]
 ];

@@ -14,6 +14,7 @@ use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetNameFi
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages\CreateAsset;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages\EditAsset;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages\ListAssets;
+use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 
 class AssetResource extends Resource
@@ -41,7 +42,7 @@ class AssetResource extends Resource
 
     public static function getNavigationGroup(): ?string
     {
-        return config('filament-flexible-blocks-asset-manager.navigation_group');
+        return FilamentFlexibleBlocksAssetManagerConfig::getNavigationGroup();
     }
 
     public static function form(Form $form): Form
@@ -52,7 +53,7 @@ class AssetResource extends Resource
                     ->columns(2)
                     ->schema([
                         AssetNameField::create(true),
-                        AssetMediaField::create(config('filament-flexible-blocks-asset-manager.translatable_assets', false)),
+                        AssetMediaField::create(FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()),
                     ]),
             ]);
     }

@@ -8,12 +8,14 @@ use Filament\Support\Assets\Css;
 use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Filesystem\Filesystem;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Testing\TestsLaravelFilamentFlexibleBlocksAssetManager;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset as AssetModel;
 
 class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServiceProvider
 {
@@ -41,6 +43,10 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
 
         if (file_exists($package->basePath("/../config/{$configFileName}.php"))) {
             $package->hasConfigFile();
+        }
+
+        if (file_exists($package->basePath("/../routes/{$configFileName}.php"))) {
+            $package->hasRoutes($this->getRoutes());
         }
 
         if (file_exists($package->basePath('/../database/migrations'))) {
@@ -85,6 +91,13 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
 
         // Testing
         Testable::mixin(new TestsLaravelFilamentFlexibleBlocksAssetManager());
+
+        //add Asset to morph map when used:
+        if(Relation::requiresMorphMap()){
+            Relation::morphMap([
+                'filament-flexible-blocks-asset-manager::asset' => AssetModel::class,
+            ], true);
+        }
     }
 
     protected function getAssetPackageName(): ?string
@@ -99,8 +112,8 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
     {
         return [
             // AlpineComponent::make('laravel-filament-flexible-blocks-asset-manager', __DIR__ . '/../resources/dist/components/laravel-filament-flexible-blocks-asset-manager.js'),
-            Css::make('laravel-filament-flexible-blocks-asset-manager-styles', __DIR__ . '/../resources/dist/laravel-filament-flexible-blocks-asset-manager.css'),
-            Js::make('laravel-filament-flexible-blocks-asset-manager-scripts', __DIR__ . '/../resources/dist/laravel-filament-flexible-blocks-asset-manager.js'),
+            //Css::make('laravel-filament-flexible-blocks-asset-manager-styles', __DIR__ . '/../resources/dist/laravel-filament-flexible-blocks-asset-manager.css'),
+            //Js::make('laravel-filament-flexible-blocks-asset-manager-scripts', __DIR__ . '/../resources/dist/laravel-filament-flexible-blocks-asset-manager.js'),
         ];
     }
 
@@ -129,7 +142,9 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
      */
     protected function getRoutes(): array
     {
-        return [];
+        return [
+            'filament-flexible-blocks-asset-manager',
+        ];
     }
 
     /**

@@ -43,4 +43,9 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia
     {
         return self::MEDIA_COLLECTION_ASSETS;
     }
+
+    /*public function getMorphClass(): string
+    {
+        return 'filament-flexible-blocks-asset-manager::asset';
+    }*/
 }
