@@ -21,4 +21,3 @@ class ListAssets extends ListRecords
         ];
     }
 }
-

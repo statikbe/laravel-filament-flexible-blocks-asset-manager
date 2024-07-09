@@ -39,7 +39,7 @@ class FilamentFlexibleBlocksAssetManagerConfig
         return config('filament-flexible-blocks-asset-manager.accepted_file_types') ?? [];
     }
 
-    public static function getImageEditor(): array|null
+    public static function getImageEditor(): ?array
     {
         return config('filament-flexible-blocks-asset-manager.image_editor', null);
     }

@@ -98,5 +98,5 @@ return [
     'asset_authorisation' => [
         //'gate' => 'asset-access',
         //'policy' => AssetPolicy::class,
-    ]
+    ],
 ];
