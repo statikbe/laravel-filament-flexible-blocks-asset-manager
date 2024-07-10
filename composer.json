@@ -3,8 +3,17 @@
     "description": "A simple document and image manager for the Filament Flexible Blocks package.",
     "keywords": [
         "Statik.be",
+        "laravel-filament-flexible-content-blocks",
+        "Laravel Filament Flexible Content Blocks",
+        "statikbe",
         "laravel",
-        "laravel-filament-flexible-blocks-asset-manager"
+        "laravel filament",
+        "content builder",
+        "page",
+        "page builder",
+        "cms",
+        "block builder",
+        "responsive images"
     ],
     "homepage": "https://github.com/statik-be/laravel-filament-flexible-blocks-asset-manager",
     "support": {
