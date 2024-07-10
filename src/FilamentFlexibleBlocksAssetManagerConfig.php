@@ -39,7 +39,7 @@ class FilamentFlexibleBlocksAssetManagerConfig
         return self::getConfig('accepted_file_types') ?? [];
     }
 
-    public static function getImageEditor(): array|null
+    public static function getImageEditor(): ?array
     {
         return self::getConfig('image_editor', null);
     }

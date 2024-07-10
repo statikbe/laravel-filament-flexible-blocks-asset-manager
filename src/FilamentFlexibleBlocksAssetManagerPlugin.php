@@ -16,7 +16,7 @@ class FilamentFlexibleBlocksAssetManagerPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel->resources([
-            AssetResource::class
+            AssetResource::class,
         ]);
     }
 

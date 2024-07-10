@@ -3,10 +3,10 @@
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields;
 
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Support\Assets\Asset;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ImageField;
-use Filament\Support\Assets\Asset;
 
 class AssetMediaField extends ImageField
 {
@@ -27,7 +27,7 @@ class AssetMediaField extends ImageField
             ->conversion('thumbnail');
 
         $acceptedFileTypes = FilamentFlexibleBlocksAssetManagerConfig::getAcceptedFileTypes();
-        if(!empty($acceptedFileTypes)){
+        if (! empty($acceptedFileTypes)) {
             $component->acceptedFileTypes($acceptedFileTypes);
         }
 

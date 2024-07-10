@@ -5,7 +5,6 @@ use Illuminate\Support\Str;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Http\Controllers\AssetController;
 
-
 $assetRoutePrefix = FilamentFlexibleBlocksAssetManagerConfig::getAssetRoutePrefix();
 $assetRoutePrefix = Str::replaceEnd('/', '', $assetRoutePrefix);
 

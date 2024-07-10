@@ -22,6 +22,4 @@ class AssetNameField extends TextInput
             ->addsTranslatableHint()
             ->required($required);
     }
-
 }
-

@@ -1,4 +1,5 @@
 <?php
+
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\Blocks\Type;
 
 use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
@@ -15,7 +16,7 @@ class AssetCallToActionType extends CallToActionType
         $this->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset_lbl'));
 
         $this->searchColumns(['name']);
-        $this->getOptionLabelFromRecordUsing(function(Asset $record, ?string $locale){
+        $this->getOptionLabelFromRecordUsing(function (Asset $record, ?string $locale) {
             return $record->translate('name', $locale);
         });
     }

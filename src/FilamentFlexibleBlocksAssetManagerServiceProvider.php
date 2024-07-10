@@ -14,8 +14,8 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Statikbe\FilamentFlexibleBlocksAssetManager\Testing\TestsLaravelFilamentFlexibleBlocksAssetManager;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset as AssetModel;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Testing\TestsLaravelFilamentFlexibleBlocksAssetManager;
 
 class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServiceProvider
 {
@@ -93,7 +93,7 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
         Testable::mixin(new TestsLaravelFilamentFlexibleBlocksAssetManager());
 
         //add Asset to morph map when used:
-        if(Relation::requiresMorphMap()){
+        if (Relation::requiresMorphMap()) {
             Relation::morphMap([
                 'filament-flexible-blocks-asset-manager::asset' => AssetModel::class,
             ], true);
@@ -133,7 +133,7 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
     protected function getIcons(): array
     {
         return [
-            'heroicon-o-photo'
+            'heroicon-o-photo',
         ];
     }
 

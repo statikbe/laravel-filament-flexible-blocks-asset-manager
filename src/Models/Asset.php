@@ -17,16 +17,17 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
  */
 class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
 {
+    use HasTranslatedMediaTrait;
     use HasTranslations;
     use InteractsWithMedia;
-    use HasTranslatedMediaTrait;
 
     const MEDIA_COLLECTION_ASSETS = 'assets';
 
     public $translatable = ['name'];
+
     public $guarded = [];
 
-    public function registerMediaConversions(Media $media = null): void
+    public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumbnail')
             ->fit(Fit::Contain, 300, 300)

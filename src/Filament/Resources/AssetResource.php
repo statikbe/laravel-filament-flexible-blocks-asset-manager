@@ -63,7 +63,7 @@ class AssetResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label(trans("filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.form_component.name_lbl"))
+                    ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.form_component.name_lbl'))
                     ->limit(50)
                     ->tooltip(function (TextColumn $column): ?string {
                         $state = $column->getState();
@@ -75,7 +75,7 @@ class AssetResource extends Resource
                         // Only render the tooltip if the column contents exceeds the length limit.
                         return $state;
                     })
-                    ->sortable()
+                    ->sortable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
