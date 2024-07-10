@@ -6,46 +6,56 @@ class FilamentFlexibleBlocksAssetManagerConfig
 {
     public static function hasTranslatableAssets(): bool
     {
-        return config('filament-flexible-blocks-asset-manager.translatable_assets', false);
+        return self::getConfig('translatable_assets', false);
     }
 
     public static function getAssetAuthorisationGate(): ?string
     {
-        return config('filament-flexible-blocks-asset-manager.asset_authorisation.gate');
+        return self::getConfig('asset_authorisation.gate');
     }
 
     public static function getAssetAuthorisationPolicy(): ?string
     {
-        return config('filament-flexible-blocks-asset-manager.asset_authorisation.policy');
+        return self::getConfig('asset_authorisation.policy');
     }
 
     public static function getStorageDisk(): ?string
     {
-        return config('filament-flexible-blocks-asset-manager.storage_disk');
+        return self::getConfig('storage_disk');
     }
 
     public static function getStorageDirectory(): ?string
     {
-        return config('filament-flexible-blocks-asset-manager.storage_directory');
+        return self::getConfig('storage_directory');
     }
 
     public static function getStorageVisibility(): ?string
     {
-        return config('filament-flexible-blocks-asset-manager.storage_visibility') ?? 'public';
+        return self::getConfig('storage_visibility') ?? 'public';
     }
 
     public static function getAcceptedFileTypes(): array
     {
-        return config('filament-flexible-blocks-asset-manager.accepted_file_types') ?? [];
+        return self::getConfig('accepted_file_types') ?? [];
     }
 
     public static function getImageEditor(): array|null
     {
-        return config('filament-flexible-blocks-asset-manager.image_editor', null);
+        return self::getConfig('image_editor', null);
     }
 
     public static function getNavigationGroup(): ?string
     {
-        return config('filament-flexible-blocks-asset-manager.navigation_group');
+        return self::getConfig('navigation_group');
+    }
+
+    public static function getAssetRoutePrefix(): ?string
+    {
+        return self::getConfig('asset_route_prefix', '/asset');
+    }
+
+    public static function getConfig($key = null, $default = null)
+    {
+        return config('filament-flexible-blocks-asset-manager.' . $key, $default);
     }
 }

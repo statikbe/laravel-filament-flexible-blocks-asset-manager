@@ -10,11 +10,12 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasTranslatedMediaTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasTranslatableMedia;
+use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
 /**
  * @property string $name
  */
-class Asset extends Model implements HasMedia, HasTranslatableMedia
+class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
 {
     use HasTranslations;
     use InteractsWithMedia;
@@ -44,8 +45,16 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia
         return self::MEDIA_COLLECTION_ASSETS;
     }
 
-    /*public function getMorphClass(): string
+    public function getViewUrl(?string $locale = null): string
     {
-        return 'filament-flexible-blocks-asset-manager::asset';
-    }*/
+        return route('filament-flexible-blocks-asset-manager.asset_index', [
+            'asset' => $this,
+            'locale' => $locale,
+        ]);
+    }
+
+    public function getPreviewUrl(?string $locale = null): string
+    {
+        $this->getViewUrl($locale);
+    }
 }

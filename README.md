@@ -1,13 +1,18 @@
-# A simple document and image manager for the Filament Flexible Blocks package.
+# Laravel Filament Flexible Blocks Asset Manager
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/statik-be/laravel-filament-flexible-blocks-asset-manager.svg?style=flat-square)](https://packagist.org/packages/statik-be/laravel-filament-flexible-blocks-asset-manager)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/statik-be/laravel-filament-flexible-blocks-asset-manager/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/statik-be/laravel-filament-flexible-blocks-asset-manager/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/statik-be/laravel-filament-flexible-blocks-asset-manager/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/statik-be/laravel-filament-flexible-blocks-asset-manager/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/statik-be/laravel-filament-flexible-blocks-asset-manager.svg?style=flat-square)](https://packagist.org/packages/statik-be/laravel-filament-flexible-blocks-asset-manager)
 
+This package provides a simple document and image manager for the [Laravel Filament Flexible Content Blocks](https://github.com/statikbe/laravel-filament-flexible-content-blocks) package.
 
+The key features are:
 
-This is where your description should go. Limit it to a paragraph or two. Consider adding a small example.
+- a simple asset model 
+- integration with the call-to-action features of the [Laravel Filament Flexible Content Blocks](https://github.com/statikbe/laravel-filament-flexible-content-blocks) package.
+- basic filament CRUD UI
+- routing to retrieve the assets
 
 ## Installation
 
@@ -30,31 +35,55 @@ You can publish the config file with:
 php artisan vendor:publish --tag="laravel-filament-flexible-blocks-asset-manager-config"
 ```
 
-Optionally, you can publish the views using
+Optionally, you can publish the translations using
 
 ```bash
-php artisan vendor:publish --tag="laravel-filament-flexible-blocks-asset-manager-views"
+php artisan vendor:publish --tag="laravel-filament-flexible-blocks-asset-manager-translations"
 ```
 
-This is the contents of the published config file:
+### Setup with the Filament Flexible Content Blocks package
+
+To integrate the plugin with Filament, you need to add it a panel in the filament service provider. See the code sample below:
+
+```php
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->default()
+        //...
+        ->plugins([
+            SpatieLaravelTranslatablePlugin::make()
+                ->defaultLocales(['nl']),
+            //...
+            FilamentFlexibleBlocksAssetManagerPlugin::make()
+        ]);
+}
+```
+
+Then to use the asset manager in the call-to-actions you have to add them to the configuration of the Filament Flexible 
+Content Blocks package:
 
 ```php
 return [
-];
+    //...
+     
+    'call_to_action_models' => [
+        [
+            'model' => \Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset::class,
+            'call_to_action_type' => \Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\Blocks\Type\AssetCallToActionType::class,
+        ],
+        //...
+        //\App\Models\TranslatablePage::class,
+    ],
+        
+    //...
+]
 ```
 
-## Usage
+## Configuration
 
-```php
-$laravelFilamentFlexibleBlocksAssetManager = new Statikbe\LaravelFilamentFlexibleBlocksAssetManager();
-echo $laravelFilamentFlexibleBlocksAssetManager->echoPhrase('Hello, Statikbe!');
-```
-
-## Testing
-
-```bash
-composer test
-```
+The configuration file is [filament-flexible-blocks-asset-manager.php](config%2Ffilament-flexible-blocks-asset-manager.php)
+fully commented, to explain each configuration option.
 
 ## Changelog
 

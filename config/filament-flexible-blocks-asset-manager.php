@@ -98,5 +98,15 @@ return [
     'asset_authorisation' => [
         //'gate' => 'asset-access',
         //'policy' => AssetPolicy::class,
-    ]
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Asset route prefix
+    |--------------------------------------------------------------------------
+    |
+    | You can change the start of the route path by setting this config.
+    | Do not add a slash as the last character this will be added automatically.
+    */
+    'asset_route_prefix' => '/asset'
 ];
