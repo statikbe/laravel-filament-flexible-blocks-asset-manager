@@ -25,20 +25,20 @@ composer require statikbe/laravel-filament-flexible-blocks-asset-manager
 You can publish and run the migrations with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-filament-flexible-blocks-asset-manager-migrations"
+php artisan vendor:publish --tag="filament-flexible-blocks-asset-manager-migrations"
 php artisan migrate
 ```
 
 You can publish the config file with:
 
 ```bash
-php artisan vendor:publish --tag="laravel-filament-flexible-blocks-asset-manager-config"
+php artisan vendor:publish --tag="filament-flexible-blocks-asset-manager-config"
 ```
 
 Optionally, you can publish the translations using
 
 ```bash
-php artisan vendor:publish --tag="laravel-filament-flexible-blocks-asset-manager-translations"
+php artisan vendor:publish --tag="filament-flexible-blocks-asset-manager-translations"
 ```
 
 ### Setup with the Filament Flexible Content Blocks package
