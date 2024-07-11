@@ -1,9 +1,9 @@
 # Laravel Filament Flexible Blocks Asset Manager
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/statik-be/laravel-filament-flexible-blocks-asset-manager.svg?style=flat-square)](https://packagist.org/packages/statik-be/laravel-filament-flexible-blocks-asset-manager)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/statik-be/laravel-filament-flexible-blocks-asset-manager/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/statik-be/laravel-filament-flexible-blocks-asset-manager/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/statik-be/laravel-filament-flexible-blocks-asset-manager/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/statik-be/laravel-filament-flexible-blocks-asset-manager/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/statik-be/laravel-filament-flexible-blocks-asset-manager.svg?style=flat-square)](https://packagist.org/packages/statik-be/laravel-filament-flexible-blocks-asset-manager)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/statikbe/laravel-filament-flexible-blocks-asset-manager.svg?style=flat-square)](https://packagist.org/packages/statikbe/laravel-filament-flexible-blocks-asset-manager)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/statikbe/laravel-filament-flexible-blocks-asset-manager/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/statikbe/laravel-filament-flexible-blocks-asset-manager/fix-php-code-styling.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/statikbe/laravel-filament-flexible-blocks-asset-manager.svg?style=flat-square)](https://packagist.org/packages/statikbe/laravel-filament-flexible-blocks-asset-manager)
 
 This package provides a simple document and image manager for the [Laravel Filament Flexible Content Blocks](https://github.com/statikbe/laravel-filament-flexible-content-blocks) package.
 
@@ -19,7 +19,7 @@ The key features are:
 You can install the package via composer:
 
 ```bash
-composer require statik-be/laravel-filament-flexible-blocks-asset-manager
+composer require statikbe/laravel-filament-flexible-blocks-asset-manager
 ```
 
 You can publish and run the migrations with:
