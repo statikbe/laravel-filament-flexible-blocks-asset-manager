@@ -93,11 +93,9 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
         Testable::mixin(new TestsLaravelFilamentFlexibleBlocksAssetManager());
 
         //add Asset to morph map when used:
-        if (Relation::requiresMorphMap()) {
-            Relation::morphMap([
-                'filament-flexible-blocks-asset-manager::asset' => AssetModel::class,
-            ], true);
-        }
+        Relation::morphMap([
+            'filament-flexible-blocks-asset-manager::asset' => AssetModel::class,
+        ], true);
     }
 
     protected function getAssetPackageName(): ?string
