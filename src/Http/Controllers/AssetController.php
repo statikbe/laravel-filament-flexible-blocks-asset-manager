@@ -19,11 +19,6 @@ class AssetController
             }
         }
 
-        //check if a policy needs to be applied:
-        if (FilamentFlexibleBlocksAssetManagerConfig::getAssetAuthorisationPolicy()) {
-            Gate::authorize('view', $asset);
-        }
-
         //TODO conversions
         $filters = [];
         if ($locale) {

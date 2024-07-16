@@ -11,17 +11,12 @@ class FilamentFlexibleBlocksAssetManagerConfig
 
     public static function getAssetAuthorisationGate(): ?string
     {
-        return self::getConfig('asset_authorisation.gate');
+        return self::getConfig('asset_authorisation.gate', 'view');
     }
 
     public static function getAssetAuthorisationPolicy(): ?string
     {
         return self::getConfig('asset_authorisation.policy');
-    }
-
-    public static function getAssetFilamentAuthorisationPolicy(): ?string
-    {
-        return self::getConfig('asset_filament_authorisation');
     }
 
     public static function getStorageDisk(): ?string

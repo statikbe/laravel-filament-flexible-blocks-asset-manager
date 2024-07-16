@@ -99,10 +99,6 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
         ], true);
 
         //add policies
-        if(FilamentFlexibleBlocksAssetManagerConfig::getAssetFilamentAuthorisationPolicy()){
-            Gate::policy(\Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset::class,
-                FilamentFlexibleBlocksAssetManagerConfig::getAssetFilamentAuthorisationPolicy());
-        }
         if(FilamentFlexibleBlocksAssetManagerConfig::getAssetAuthorisationPolicy()){
             Gate::policy(\Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset::class,
                 FilamentFlexibleBlocksAssetManagerConfig::getAssetAuthorisationPolicy());
