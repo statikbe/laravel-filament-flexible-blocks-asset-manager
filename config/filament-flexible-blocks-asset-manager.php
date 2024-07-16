@@ -89,11 +89,12 @@ return [
     | Asset authorisation
     |--------------------------------------------------------------------------
     |
-    | The assets URLs can be protected. This can be done in different ways:
-    | 1. a gate, see https://laravel.com/docs/11.x/authorization#gates
-    |    You can define a gate that takes the asset record as argument.
-    | 2. a policy, see https://laravel.com/docs/11.x/authorization#writing-policies
-    |    You can write a policy for the Asset model. The `view` policy will be used to authorise.
+    | The assets URLs can be protected and access to the Filament can be configured. 
+    | You need to define a new model policy and add an extra function for the public 
+    | file access of the asset. The name of this function needs to be added to the key
+    | 'gate'. The policy class needs to be added to the key 'policy'.
+    | see https://laravel.com/docs/11.x/authorization#gates and
+    | https://laravel.com/docs/11.x/authorization#writing-policies
     */
     'asset_authorisation' => [
         //'gate' => 'asset-access',
