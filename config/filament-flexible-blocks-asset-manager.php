@@ -89,8 +89,8 @@ return [
     | Asset authorisation
     |--------------------------------------------------------------------------
     |
-    | The assets URLs can be protected and access to the Filament can be configured. 
-    | You need to define a new model policy and add an extra function for the public 
+    | The assets URLs can be protected and access to the Filament can be configured.
+    | You need to define a new model policy and add an extra function for the public
     | file access of the asset. The name of this function needs to be added to the key
     | 'gate'. The policy class needs to be added to the key 'policy'.
     | see https://laravel.com/docs/11.x/authorization#gates and
