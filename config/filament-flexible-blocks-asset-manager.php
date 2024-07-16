@@ -86,6 +86,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Asset Filament authorisation
+    |--------------------------------------------------------------------------
+    |
+    | To authorise access to the Filament resource, you can configure a policy,
+    | see https://laravel.com/docs/11.x/authorization#writing-policies
+    */
+    'asset_filament_authorisation' => null, //AssetFilamentPolicy::class,
+
+    /*
+    |--------------------------------------------------------------------------
     | Asset authorisation
     |--------------------------------------------------------------------------
     |

@@ -10,6 +10,7 @@ use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Gate;
 use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
@@ -96,6 +97,16 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
         Relation::morphMap([
             'filament-flexible-blocks-asset-manager::asset' => AssetModel::class,
         ], true);
+
+        //add policies
+        if(FilamentFlexibleBlocksAssetManagerConfig::getAssetFilamentAuthorisationPolicy()){
+            Gate::policy(\Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset::class,
+                FilamentFlexibleBlocksAssetManagerConfig::getAssetFilamentAuthorisationPolicy());
+        }
+        if(FilamentFlexibleBlocksAssetManagerConfig::getAssetAuthorisationPolicy()){
+            Gate::policy(\Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset::class,
+                FilamentFlexibleBlocksAssetManagerConfig::getAssetAuthorisationPolicy());
+        }
     }
 
     protected function getAssetPackageName(): ?string
