@@ -28,7 +28,7 @@ class AssetController
         return $asset
             ->getFirstMedia($asset->getAssetCollection(), $filters)
             ->setCustomHeaders([
-                'X-Robots-Tag' => 'none' //equivalent to noindex, nofollow.
+                'X-Robots-Tag' => 'none', //equivalent to noindex, nofollow.
             ]);
     }
 }

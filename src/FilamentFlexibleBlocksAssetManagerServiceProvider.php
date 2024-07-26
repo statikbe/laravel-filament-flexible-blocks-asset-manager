@@ -91,7 +91,7 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
         }
 
         // Testing
-        Testable::mixin(new TestsLaravelFilamentFlexibleBlocksAssetManager());
+        Testable::mixin(new TestsLaravelFilamentFlexibleBlocksAssetManager);
 
         //add Asset to morph map when used:
         Relation::morphMap([
