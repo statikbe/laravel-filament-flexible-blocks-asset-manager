@@ -25,6 +25,10 @@ class AssetController
             $filters = ['locale' => $locale];
         }
 
-        return $asset->getFirstMedia($asset->getAssetCollection(), $filters);
+        return $asset
+            ->getFirstMedia($asset->getAssetCollection(), $filters)
+            ->setCustomHeaders([
+                'X-Robots-Tag' => 'none' //equivalent to noindex, nofollow.
+            ]);
     }
 }
