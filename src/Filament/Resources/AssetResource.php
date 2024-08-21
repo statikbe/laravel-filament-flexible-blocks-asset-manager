@@ -15,15 +15,14 @@ use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages\EditAsset;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages\ListAssets;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
-use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 
 class AssetResource extends Resource
 {
     use Translatable;
 
-    protected static ?string $model = Asset::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-photo';
+
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function getNavigationLabel(): string
     {
@@ -40,9 +39,23 @@ class AssetResource extends Resource
         return trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset_plural_lbl');
     }
 
+    public static function getModel(): string
+    {
+        return FilamentFlexibleBlocksAssetManagerConfig::getModel();
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return FilamentFlexibleBlocksAssetManagerConfig::getNavigationGroup();
+    }
+
+    public static function getDefaultComponents(): array
+    {
+        return [
+            AssetNameField::create(true),
+            AssetMediaField::create(FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets())
+                ->required(),
+        ];
     }
 
     public static function form(Form $form): Form
@@ -52,8 +65,7 @@ class AssetResource extends Resource
                 Section::make()
                     ->columns(2)
                     ->schema([
-                        AssetNameField::create(true),
-                        AssetMediaField::create(FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()),
+                        ...static::getDefaultComponents(),
                     ]),
             ]);
     }

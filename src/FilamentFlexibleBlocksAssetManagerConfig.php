@@ -19,6 +19,11 @@ class FilamentFlexibleBlocksAssetManagerConfig
         return self::getConfig('asset_authorisation.policy');
     }
 
+    public static function getAssetMiddleware(): ?string
+    {
+        return self::getConfig('asset_authorisation.middleware');
+    }
+
     public static function getStorageDisk(): ?string
     {
         return self::getConfig('storage_disk');
@@ -47,6 +52,16 @@ class FilamentFlexibleBlocksAssetManagerConfig
     public static function getNavigationGroup(): ?string
     {
         return self::getConfig('navigation_group');
+    }
+
+    public static function getModel(): ?string
+    {
+        return self::getConfig('model');
+    }
+
+    public static function getResource(): ?string
+    {
+        return self::getConfig('resource');
     }
 
     public static function getAssetRoutePrefix(): ?string

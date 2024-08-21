@@ -1,6 +1,7 @@
 <?php
 
 // config for Statik/FilamentFlexibleBlocksAssetManager
+
 return [
     /*
     |--------------------------------------------------------------------------
@@ -19,6 +20,16 @@ return [
     | Sets the navigation group label to which the assets table is added.
     */
     'navigation_group' => null,
+
+    /*
+    |--------------------------------------------------------------------------
+    | Model & Resource
+    |--------------------------------------------------------------------------
+    |
+    | You can override the model and resource that are used. Be sure to inherit from our defaults.
+    */
+    'model' => \Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset::class,
+    'resource' => \Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -93,12 +104,16 @@ return [
     | You need to define a new model policy and add an extra function for the public
     | file access of the asset. The name of this function needs to be added to the key
     | 'gate'. The policy class needs to be added to the key 'policy'.
+    | The middleware is only used for assets URLs. You can get the assetId in the middleware by
+    | calling $request->route('assetId')
+    |
     | see https://laravel.com/docs/11.x/authorization#gates and
     | https://laravel.com/docs/11.x/authorization#writing-policies
     */
     'asset_authorisation' => [
         //'gate' => 'asset-access',
         //'policy' => AssetPolicy::class,
+        //'middleware' => AssetRedirectMiddleware::class,
     ],
 
     /*

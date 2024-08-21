@@ -49,13 +49,13 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
     public function getViewUrl(?string $locale = null): string
     {
         return route('filament-flexible-blocks-asset-manager.asset_index', [
-            'asset' => $this,
+            'assetId' => $this,
             'locale' => $locale,
         ]);
     }
 
     public function getPreviewUrl(?string $locale = null): string
     {
-        $this->getViewUrl($locale);
+        return $this->getViewUrl($locale);
     }
 }
