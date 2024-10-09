@@ -3,7 +3,7 @@
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields;
 
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Support\Assets\Asset;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ImageField;
