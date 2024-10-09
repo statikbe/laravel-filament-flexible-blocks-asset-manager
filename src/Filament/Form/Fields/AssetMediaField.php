@@ -3,9 +3,9 @@
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields;
 
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 use Illuminate\Database\Eloquent\Model;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\ImageField;
 
 class AssetMediaField extends ImageField
