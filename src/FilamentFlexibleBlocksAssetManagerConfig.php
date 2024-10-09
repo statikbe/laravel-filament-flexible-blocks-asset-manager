@@ -46,7 +46,7 @@ class FilamentFlexibleBlocksAssetManagerConfig
 
     public static function getNavigationGroup(): ?string
     {
-        return self::getConfig('navigation_group');
+        return self::getConfig('navigation_group') ?? trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.navigation_group');
     }
 
     public static function getAssetRoutePrefix(): ?string

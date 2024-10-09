@@ -6,4 +6,5 @@ return [
     'asset_plural_lbl' => 'Assets',
     'form_component.name_lbl' => 'Name',
     'form_component.asset_media_lbl' => 'File',
+    'navigation_group' => 'Settings',
 ];

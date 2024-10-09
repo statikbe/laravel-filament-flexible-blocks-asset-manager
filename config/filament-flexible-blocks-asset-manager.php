@@ -16,7 +16,8 @@ return [
     | Navigation group
     |--------------------------------------------------------------------------
     |
-    | Sets the navigation group label to which the assets table is added.
+    | Sets the navigation group label to which the assets table is added. Or if you use translations, set it in this
+    | translation key: filament-flexible-blocks-asset-manager.navigation_group
     */
     'navigation_group' => null,
 
