@@ -4,7 +4,6 @@ namespace Statikbe\FilamentFlexibleBlocksAssetManager;
 
 use Filament\Contracts\Plugin;
 use Filament\Panel;
-use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource;
 
 class FilamentFlexibleBlocksAssetManagerPlugin implements Plugin
 {
@@ -16,7 +15,7 @@ class FilamentFlexibleBlocksAssetManagerPlugin implements Plugin
     public function register(Panel $panel): void
     {
         $panel->resources([
-            AssetResource::class,
+            FilamentFlexibleBlocksAssetManagerConfig::getResource(),
         ]);
     }
 

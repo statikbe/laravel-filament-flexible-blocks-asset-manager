@@ -5,12 +5,13 @@ namespace Statikbe\FilamentFlexibleBlocksAssetManager\Http\Controllers;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
-use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 
 class AssetController
 {
-    public function index(Asset $asset, ?string $locale = null)
+    public function index(string $assetId, ?string $locale = null)
     {
+        $asset = FilamentFlexibleBlocksAssetManagerConfig::getModel()::findOrFail($assetId);
+
         //check if a gate needs to be applied:
         $authGate = FilamentFlexibleBlocksAssetManagerConfig::getAssetAuthorisationGate();
         if ($authGate) {
@@ -25,6 +26,10 @@ class AssetController
             $filters = ['locale' => $locale];
         }
 
-        return $asset->getFirstMedia($asset->getAssetCollection(), $filters);
+        return $asset
+            ->getFirstMedia($asset->getAssetCollection(), $filters)
+            ->setCustomHeaders([
+                'X-Robots-Tag' => 'none', //equivalent to noindex, nofollow.
+            ]);
     }
 }

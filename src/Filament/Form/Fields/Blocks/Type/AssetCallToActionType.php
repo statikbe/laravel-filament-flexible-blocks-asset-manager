@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\Blocks\Type;
 
+use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Form\Fields\Blocks\Type\CallToActionType;
 
@@ -12,7 +13,7 @@ class AssetCallToActionType extends CallToActionType
         parent::setUp();
 
         $this->titleColumnName('name');
-        $this->model(Asset::class);
+        $this->model(FilamentFlexibleBlocksAssetManagerConfig::getModel());
         $this->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset_lbl'));
 
         $this->searchColumns(['name']);

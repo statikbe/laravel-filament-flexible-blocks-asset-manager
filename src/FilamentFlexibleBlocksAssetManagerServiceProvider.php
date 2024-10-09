@@ -2,10 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager;
 
-use Filament\Support\Assets\AlpineComponent;
 use Filament\Support\Assets\Asset;
-use Filament\Support\Assets\Css;
-use Filament\Support\Assets\Js;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -15,7 +12,6 @@ use Livewire\Features\SupportTesting\Testable;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset as AssetModel;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Testing\TestsLaravelFilamentFlexibleBlocksAssetManager;
 
 class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServiceProvider
@@ -91,17 +87,17 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
         }
 
         // Testing
-        Testable::mixin(new TestsLaravelFilamentFlexibleBlocksAssetManager());
+        Testable::mixin(new TestsLaravelFilamentFlexibleBlocksAssetManager);
 
         //add Asset to morph map when used:
         Relation::morphMap([
-            'filament-flexible-blocks-asset-manager::asset' => AssetModel::class,
+            'filament-flexible-blocks-asset-manager::asset' => FilamentFlexibleBlocksAssetManagerConfig::getModel(),
         ], true);
 
         //add policies
         if (FilamentFlexibleBlocksAssetManagerConfig::getAssetAuthorisationPolicy()) {
             Gate::policy(
-                \Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset::class,
+                FilamentFlexibleBlocksAssetManagerConfig::getModel(),
                 FilamentFlexibleBlocksAssetManagerConfig::getAssetAuthorisationPolicy()
             );
         }
