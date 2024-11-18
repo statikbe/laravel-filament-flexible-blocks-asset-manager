@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-blocks-asset-manager` will be documented in this file.
 
+## v1.0.4 - 2024-11-18
+
+Fix typing bug
+
 ## v1.0.3 - 2024-11-18
 
 Fix bug with translatable asset media
