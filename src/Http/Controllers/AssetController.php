@@ -4,6 +4,8 @@ namespace Statikbe\FilamentFlexibleBlocksAssetManager\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 
 class AssetController
@@ -20,16 +22,32 @@ class AssetController
             }
         }
 
-        //TODO conversions
-        $filters = [];
-        if ($locale) {
-            $filters = ['locale' => $locale];
+        $assetMedia = $this->getAssetMedia($asset, $locale);
+
+        if (! $assetMedia) {
+            abort(Response::HTTP_NOT_FOUND, trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.error.asset_media_not_found'));
         }
 
-        return $asset
-            ->getFirstMedia($asset->getAssetCollection(), $filters)
+        return $assetMedia
             ->setCustomHeaders([
                 'X-Robots-Tag' => 'none', //equivalent to noindex, nofollow.
             ]);
+    }
+
+    private function getAssetMedia(InteractsWithMedia $asset, ?string $locale = null): ?Media
+    {
+        //TODO conversions
+        $assetMedia = null;
+        if (! $locale && FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()) {
+            $locale = app()->getLocale();
+            $filters = ['locale' => $locale];
+            $assetMedia = $asset->getFirstMedia($asset->getAssetCollection(), $filters);
+        }
+
+        if (! $assetMedia) {
+            $assetMedia = $asset->getFirstMedia($asset->getAssetCollection());
+        }
+
+        return $assetMedia;
     }
 }

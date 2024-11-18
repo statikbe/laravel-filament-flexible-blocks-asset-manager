@@ -8,6 +8,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Translatable\HasTranslations;
+use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Concerns\HasTranslatedMediaTrait;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\HasTranslatableMedia;
 use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
@@ -48,6 +49,11 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
 
     public function getViewUrl(?string $locale = null): string
     {
+        //add current locale if not passed, the asset controller will use the default locale if none is passed.
+        if (! $locale && FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()) {
+            $locale = app()->getLocale();
+        }
+
         return route('filament-flexible-blocks-asset-manager.asset_index', [
             'assetId' => $this,
             'locale' => $locale,

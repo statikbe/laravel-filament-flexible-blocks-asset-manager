@@ -7,4 +7,7 @@ return [
     'form_component.name_lbl' => 'Nom',
     'form_component.asset_media_lbl' => 'Fichier',
     'navigation_group' => 'Preferences',
+    'error' => [
+        'asset_media_not_found' => 'Le média de la ressource n\'a pas été trouvé.',
+    ],
 ];
