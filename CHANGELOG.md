@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-filament-flexible-blocks-asset-manager` will be documented in this file.
 
+## v1.0.3 - 2024-11-18
+
+Fix bug with translatable asset media
+
 ## v1.0.1 - 2024-10-09
 
 - Make navigation group translatable
