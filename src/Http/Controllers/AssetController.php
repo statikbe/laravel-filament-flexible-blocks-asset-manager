@@ -4,7 +4,7 @@ namespace Statikbe\FilamentFlexibleBlocksAssetManager\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
-use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 
@@ -34,7 +34,7 @@ class AssetController
             ]);
     }
 
-    private function getAssetMedia(InteractsWithMedia $asset, ?string $locale = null): ?Media
+    private function getAssetMedia(HasMedia $asset, ?string $locale = null): ?Media
     {
         //TODO conversions
         $assetMedia = null;
