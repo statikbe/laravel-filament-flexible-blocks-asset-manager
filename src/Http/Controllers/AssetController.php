@@ -40,11 +40,14 @@ class AssetController
         $assetMedia = null;
         if (! $locale && FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()) {
             $locale = app()->getLocale();
-            $filters = ['locale' => $locale];
-            $assetMedia = $asset->getFirstMedia($asset->getAssetCollection(), $filters);
         }
 
+        //first try with locale
+        $filters = ['locale' => $locale];
+        $assetMedia = $asset->getFirstMedia($asset->getAssetCollection(), $filters);
+
         if (! $assetMedia) {
+            //if no media with locale try fallback:
             $assetMedia = $asset->getFirstMedia($asset->getAssetCollection());
         }
 
