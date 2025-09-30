@@ -1,3 +1,5 @@
+<img src="documentation/screenshots/banner.jpg" alt="Laravel Filament Flexible Blocks Asset Manager banner" width="100%" />
+
 # Laravel Filament Flexible Blocks Asset Manager
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/statikbe/laravel-filament-flexible-blocks-asset-manager.svg?style=flat-square)](https://packagist.org/packages/statikbe/laravel-filament-flexible-blocks-asset-manager)
