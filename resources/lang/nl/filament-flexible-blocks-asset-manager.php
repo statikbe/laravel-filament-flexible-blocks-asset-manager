@@ -10,4 +10,11 @@ return [
     'error' => [
         'asset_media_not_found' => 'Het bestand werd niet gevonden',
     ],
+    'action' => [
+        'copy_url' => 'Kopieer URL',
+        'close' => 'Sluiten',
+        'asset_url' => 'Bestand URL',
+        'copy' => 'Kopieer',
+        'url_copied' => 'URL gekopieerd!',
+    ],
 ];
