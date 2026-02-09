@@ -7,6 +7,7 @@ use Filament\Resources\Pages\ListRecords;
 use Filament\Resources\Pages\ListRecords\Concerns\Translatable;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\FlexibleLocaleSwitcher;
 
 class ListAssets extends ListRecords
 {
@@ -22,7 +23,7 @@ class ListAssets extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
+            FlexibleLocaleSwitcher::make(),
             Actions\CreateAction::make(),
         ];
     }

@@ -24,6 +24,16 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Navigation sort
+    |--------------------------------------------------------------------------
+    |
+    | Sets the navigation sort order for the asset resource in the Filament sidebar.
+    | Lower numbers appear first. Set to null to use Filament's default sorting.
+    */
+    'navigation_sort' => null,
+
+    /*
+    |--------------------------------------------------------------------------
     | Model & Resource
     |--------------------------------------------------------------------------
     |
