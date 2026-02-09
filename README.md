@@ -103,6 +103,7 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 - [Sten Govaerts](https://github.com/sten)
 - [Aurel Demiri](https://github.com/AurelDemiri)
+- [Lukas Dewijngaert](https://github.com/lukasdewijn)
 - [All Contributors](../../contributors)
 
 ## License
