@@ -2,6 +2,35 @@
 
 All notable changes to `laravel-filament-flexible-blocks-asset-manager` will be documented in this file.
 
+## v1.1.0 - 2026-02-09
+
+### What's Changed
+
+* Add asset view action and asset copy URL modal by @lukasdewijn in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/14
+  
+* feat: add configurable navigation sort and FlexibleLocaleSwitcher   by @lukasdewijn in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/15
+  
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/5
+  
+* Bump stefanzweifel/git-auto-commit-action from 5 to 6 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/6
+  
+* Bump aglipanci/laravel-pint-action from 2.5 to 2.6 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/7
+  
+* Bump actions/checkout from 4 to 5 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/8
+  
+* Bump stefanzweifel/git-auto-commit-action from 6 to 7 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/9
+  
+* Bump dependabot/fetch-metadata from 2.4.0 to 2.5.0 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/13
+  
+* Bump actions/checkout from 5 to 6 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/12
+  
+
+### New Contributors
+
+* @lukasdewijn made their first contribution in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/14
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/compare/v1.0.6...v1.1.0
+
 ## v1.0.6 - 2025-03-05
 
 ### What's Changed
