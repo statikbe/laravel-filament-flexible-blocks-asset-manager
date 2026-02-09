@@ -14,7 +14,7 @@ class AssetController
     {
         $asset = FilamentFlexibleBlocksAssetManagerConfig::getModel()::findOrFail($assetId);
 
-        //check if a gate needs to be applied:
+        // check if a gate needs to be applied:
         $authGate = FilamentFlexibleBlocksAssetManagerConfig::getAssetAuthorisationGate();
         if ($authGate) {
             if (! Gate::allows($authGate, $asset)) {
@@ -30,24 +30,24 @@ class AssetController
 
         return $assetMedia
             ->setCustomHeaders([
-                'X-Robots-Tag' => 'none', //equivalent to noindex, nofollow.
+                'X-Robots-Tag' => 'none', // equivalent to noindex, nofollow.
             ]);
     }
 
     private function getAssetMedia(HasMedia $asset, ?string $locale = null): ?Media
     {
-        //TODO conversions
+        // TODO conversions
         $assetMedia = null;
         if (! $locale && FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()) {
             $locale = app()->getLocale();
         }
 
-        //first try with locale
+        // first try with locale
         $filters = ['locale' => $locale];
         $assetMedia = $asset->getFirstMedia($asset->getAssetCollection(), $filters);
 
         if (! $assetMedia) {
-            //if no media with locale try fallback:
+            // if no media with locale try fallback:
             $assetMedia = $asset->getFirstMedia($asset->getAssetCollection());
         }
 

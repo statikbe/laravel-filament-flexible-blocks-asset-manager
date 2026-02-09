@@ -33,7 +33,7 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
         $this->addMediaConversion('thumbnail')
             ->fit(Fit::Contain, 300, 300)
             ->nonQueued();
-        //TODO configurable conversions.
+        // TODO configurable conversions.
     }
 
     public function registerMediaCollections(): void
@@ -49,7 +49,7 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
 
     public function getViewUrl(?string $locale = null): string
     {
-        //add current locale if not passed, the asset controller will use the default locale if none is passed.
+        // add current locale if not passed, the asset controller will use the default locale if none is passed.
         if (! $locale && FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()) {
             $locale = app()->getLocale();
         }

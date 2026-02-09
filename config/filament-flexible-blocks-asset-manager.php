@@ -66,7 +66,7 @@ return [
     | see https://filamentphp.com/docs/3.x/forms/fields/file-upload#file-type-validation
     */
     'accepted_file_types' => [
-        //'application/pdf'
+        // 'application/pdf'
     ],
 
     /*
@@ -112,9 +112,9 @@ return [
     | https://laravel.com/docs/11.x/authorization#writing-policies
     */
     'asset_authorisation' => [
-        //'gate' => 'asset-access',
-        //'policy' => AssetPolicy::class,
-        //'middleware' => AssetRedirectMiddleware::class,
+        // 'gate' => 'asset-access',
+        // 'policy' => AssetPolicy::class,
+        // 'middleware' => AssetRedirectMiddleware::class,
     ],
 
     /*

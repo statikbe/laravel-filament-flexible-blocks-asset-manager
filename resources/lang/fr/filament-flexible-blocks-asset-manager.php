@@ -10,4 +10,11 @@ return [
     'error' => [
         'asset_media_not_found' => 'Le média de la ressource n\'a pas été trouvé.',
     ],
+    'action' => [
+        'copy_url' => 'Copier l\'URL',
+        'close' => 'Fermer',
+        'asset_url' => 'URL du fichier',
+        'copy' => 'Copier',
+        'url_copied' => 'URL copiée !',
+    ],
 ];

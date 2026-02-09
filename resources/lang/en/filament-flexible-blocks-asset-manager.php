@@ -10,4 +10,11 @@ return [
     'error' => [
         'asset_media_not_found' => 'The asset media was not found',
     ],
+    'action' => [
+        'copy_url' => 'Copy URL',
+        'close' => 'Close',
+        'asset_url' => 'Asset URL',
+        'copy' => 'Copy',
+        'url_copied' => 'URL copied!',
+    ],
 ];

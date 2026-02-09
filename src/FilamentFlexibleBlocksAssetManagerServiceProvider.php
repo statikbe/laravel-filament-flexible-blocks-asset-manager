@@ -89,12 +89,12 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
         // Testing
         Testable::mixin(new TestsLaravelFilamentFlexibleBlocksAssetManager);
 
-        //add Asset to morph map when used:
+        // add Asset to morph map when used:
         Relation::morphMap([
             'filament-flexible-blocks-asset-manager::asset' => FilamentFlexibleBlocksAssetManagerConfig::getModel(),
         ], true);
 
-        //add policies
+        // add policies
         if (FilamentFlexibleBlocksAssetManagerConfig::getAssetAuthorisationPolicy()) {
             Gate::policy(
                 FilamentFlexibleBlocksAssetManagerConfig::getModel(),
@@ -115,8 +115,8 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
     {
         return [
             // AlpineComponent::make('laravel-filament-flexible-blocks-asset-manager', __DIR__ . '/../resources/dist/components/laravel-filament-flexible-blocks-asset-manager.js'),
-            //Css::make('laravel-filament-flexible-blocks-asset-manager-styles', __DIR__ . '/../resources/dist/laravel-filament-flexible-blocks-asset-manager.css'),
-            //Js::make('laravel-filament-flexible-blocks-asset-manager-scripts', __DIR__ . '/../resources/dist/laravel-filament-flexible-blocks-asset-manager.js'),
+            // Css::make('laravel-filament-flexible-blocks-asset-manager-styles', __DIR__ . '/../resources/dist/laravel-filament-flexible-blocks-asset-manager.css'),
+            // Js::make('laravel-filament-flexible-blocks-asset-manager-scripts', __DIR__ . '/../resources/dist/laravel-filament-flexible-blocks-asset-manager.js'),
         ];
     }
 
