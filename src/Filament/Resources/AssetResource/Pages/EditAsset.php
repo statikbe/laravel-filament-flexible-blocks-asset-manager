@@ -7,6 +7,7 @@ use Filament\Resources\Pages\EditRecord;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\CopyUrlHeaderAction;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\FlexibleLocaleSwitcher;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Pages\EditRecord\Concerns\TranslatableWithMedia;
 
 class EditAsset extends EditRecord
@@ -23,7 +24,7 @@ class EditAsset extends EditRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
+            FlexibleLocaleSwitcher::make(),
             CopyUrlHeaderAction::make(),
             Actions\DeleteAction::make(),
         ];

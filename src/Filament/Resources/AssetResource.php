@@ -50,6 +50,11 @@ class AssetResource extends Resource
         return FilamentFlexibleBlocksAssetManagerConfig::getNavigationGroup();
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return FilamentFlexibleBlocksAssetManagerConfig::getNavigationSort();
+    }
+
     public static function getDefaultComponents(): array
     {
         return [
