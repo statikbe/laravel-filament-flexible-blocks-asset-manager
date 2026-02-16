@@ -2,9 +2,12 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources;
 
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
-use Filament\Resources\Concerns\Translatable;
+use Filament\Support\Icons\Heroicon;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Section;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -21,7 +24,7 @@ class AssetResource extends Resource
 {
     use Translatable;
 
-    protected static ?string $navigationIcon = 'heroicon-o-photo';
+    protected static string | \BackedEnum | null $navigationIcon = Heroicon::OutlinedPhoto;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -64,10 +67,10 @@ class AssetResource extends Resource
         ];
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Section::make()
                     ->columns(2)
                     ->schema([
@@ -96,12 +99,12 @@ class AssetResource extends Resource
                     ->searchable()
                     ->sortable(),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
                 CopyUrlAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                DeleteBulkAction::make(),
             ]);
     }
 

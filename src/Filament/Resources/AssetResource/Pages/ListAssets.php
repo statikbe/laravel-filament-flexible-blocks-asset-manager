@@ -2,9 +2,10 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages;
 
+use LaraZeus\SpatieTranslatable\Resources\Pages\ListRecords\Concerns\Translatable;
+use Filament\Actions\CreateAction;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Filament\Resources\Pages\ListRecords\Concerns\Translatable;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\FlexibleLocaleSwitcher;
@@ -24,7 +25,7 @@ class ListAssets extends ListRecords
     {
         return [
             FlexibleLocaleSwitcher::make(),
-            Actions\CreateAction::make(),
+            CreateAction::make(),
         ];
     }
 }

@@ -2,8 +2,9 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\Concerns;
 
-use Filament\Forms\Components\Actions\Action as FormAction;
+use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
+use Filament\Support\Icons\Heroicon;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 
 trait HasCopyUrlAction
@@ -12,7 +13,7 @@ trait HasCopyUrlAction
     {
         $this
             ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.action.copy_url'))
-            ->icon('heroicon-o-clipboard-document')
+            ->icon(Heroicon::OutlinedClipboardDocument)
             ->color('gray')
             ->modalHeading(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.action.copy_url'))
             ->modalSubmitAction(false)
@@ -30,8 +31,8 @@ trait HasCopyUrlAction
                             'x-on:click' => '$el.select()',
                         ])
                         ->suffixAction(
-                            FormAction::make('copy')
-                                ->icon('heroicon-o-clipboard')
+                            Action::make('copy')
+                                ->icon(Heroicon::OutlinedClipboard)
                                 ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.action.copy'))
                                 ->alpineClickHandler('
                                     const input = $el.closest(".fi-input-wrp").querySelector("input");

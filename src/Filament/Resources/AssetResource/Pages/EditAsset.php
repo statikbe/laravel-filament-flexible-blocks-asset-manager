@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages;
 
+use Filament\Actions\DeleteAction;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource;
@@ -26,7 +27,7 @@ class EditAsset extends EditRecord
         return [
             FlexibleLocaleSwitcher::make(),
             CopyUrlHeaderAction::make(),
-            Actions\DeleteAction::make(),
+            DeleteAction::make(),
         ];
     }
 }

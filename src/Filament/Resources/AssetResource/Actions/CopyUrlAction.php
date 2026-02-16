@@ -2,7 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions;
 
-use Filament\Tables\Actions\Action;
+use Filament\Actions\Action;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\Concerns\HasCopyUrlAction;
 
 class CopyUrlAction extends Action
