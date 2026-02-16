@@ -31,8 +31,8 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumbnail')
-            ->fit(Fit::Contain, 300, 300)
-            ->nonQueued();
+            ->nonQueued()
+            ->fit(Fit::Contain, 300, 300);
         // TODO configurable conversions.
     }
 
