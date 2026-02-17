@@ -43,7 +43,7 @@ it('generates view URL without locale', function () {
 
     $url = $asset->getViewUrl();
 
-    expect($url)->toContain('/asset/'.$asset->id);
+    expect($url)->toContain('/asset/' . $asset->id);
 });
 
 it('generates view URL with locale', function () {
@@ -51,7 +51,7 @@ it('generates view URL with locale', function () {
 
     $url = $asset->getViewUrl('nl');
 
-    expect($url)->toContain('/asset/'.$asset->id.'/nl');
+    expect($url)->toContain('/asset/' . $asset->id . '/nl');
 });
 
 it('getPreviewUrl equals getViewUrl', function () {
@@ -68,7 +68,7 @@ it('includes app locale in URL when translatable and no locale given', function 
     app()->setLocale('nl');
     $url = $asset->getViewUrl();
 
-    expect($url)->toContain('/asset/'.$asset->id.'/nl');
+    expect($url)->toContain('/asset/' . $asset->id . '/nl');
 });
 
 it('cleans up media when asset is deleted', function () {

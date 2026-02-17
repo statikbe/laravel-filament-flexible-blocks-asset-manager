@@ -30,7 +30,7 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Statikbe\\FilamentFlexibleBlocksAssetManager\\Tests\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'Statikbe\\FilamentFlexibleBlocksAssetManager\\Tests\\Factories\\' . class_basename($modelName) . 'Factory'
         );
     }
 
@@ -66,7 +66,7 @@ class TestCase extends Orchestra
             'prefix' => '',
         ]);
 
-        config()->set('app.key', 'base64:'.base64_encode(random_bytes(32)));
+        config()->set('app.key', 'base64:' . base64_encode(random_bytes(32)));
 
         config()->set('filament-flexible-content-blocks.supported_locales', ['en', 'nl']);
         config()->set('filament-flexible-content-blocks.default_locale', 'en');
@@ -75,6 +75,6 @@ class TestCase extends Orchestra
 
     protected function defineDatabaseMigrations()
     {
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
     }
 }
