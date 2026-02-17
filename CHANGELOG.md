@@ -2,6 +2,21 @@
 
 All notable changes to `laravel-filament-flexible-blocks-asset-manager` will be documented in this file.
 
+## v3.0.1 - 2026-02-16
+
+- Fix AssetController when the file of the media does not exists
+- Fix phpstan errors
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/compare/v3.0.0...v3.0.1
+
+## v3.0.0 - 2026-02-16
+
+Bump semver to match filament.
+v3 of this package supports Filament v3.
+v4 will be for Filament v4 & 5.
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/compare/v1.1.0...v3.0.0
+
 ## v1.1.0 - 2026-02-09
 
 ### What's Changed
