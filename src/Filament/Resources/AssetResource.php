@@ -72,6 +72,7 @@ class AssetResource extends Resource
             ->components([
                 Section::make()
                     ->columns(2)
+                    ->columnSpanFull()
                     ->schema([
                         ...static::getDefaultComponents(),
                     ]),
