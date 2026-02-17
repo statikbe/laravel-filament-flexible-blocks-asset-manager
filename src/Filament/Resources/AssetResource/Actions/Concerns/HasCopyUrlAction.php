@@ -18,7 +18,7 @@ trait HasCopyUrlAction
             ->modalHeading(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.action.copy_url'))
             ->modalSubmitAction(false)
             ->modalCancelActionLabel(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.action.close'))
-            ->form(function (): array {
+            ->schema(function (): array {
                 /** @var Asset $record */
                 $record = $this->getRecord();
 
