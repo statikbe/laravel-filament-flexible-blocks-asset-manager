@@ -2,6 +2,12 @@
 
 All notable changes to `laravel-filament-flexible-blocks-asset-manager` will be documented in this file.
 
+## v4.0.0 - 2026-02-17
+
+Filament v4 & v5 support
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/compare/v3.0.2...v4.0.0
+
 ## v3.0.2 - 2026-02-17
 
 - add unit & feature tests
