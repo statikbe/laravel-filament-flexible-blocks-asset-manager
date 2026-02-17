@@ -16,6 +16,13 @@ The key features are:
 - basic filament CRUD UI
 - routing to retrieve the assets
 
+## Versions & compatibility
+
+| Filament Version | Package Version | Development Branch |
+|---|---|---|
+| v3 | `statikbe/laravel-filament-flexible-blocks-asset-manager:^3.0` | `v3` |
+| v4 & v5 | `statikbe/laravel-filament-flexible-blocks-asset-manager:^4.0` | `main` |
+
 ## Installation
 
 You can install the package via composer:
