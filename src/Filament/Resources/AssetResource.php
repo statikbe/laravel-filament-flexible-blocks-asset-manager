@@ -7,6 +7,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetMediaField;
@@ -75,6 +76,7 @@ class AssetResource extends Resource
     {
         return $table
             ->columns([
+
                 TextColumn::make('name')
                     ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.form_component.name_lbl'))
                     ->limit(50)
@@ -90,6 +92,38 @@ class AssetResource extends Resource
                     })
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('extension')
+                    ->label('Type')
+                    ->state(function ($record) {
+                        $media = $record->getFirstMedia('assets', ['locale' => app()->getLocale()])
+                            ?? $record->getFirstMedia('assets');
+
+                        return $media?->extension;
+                    }),
+
+                ImageColumn::make('preview')
+                    ->label('')
+                    ->getStateUsing(function ($record) {
+                        $media = $record->getFirstMedia('assets', ['locale' => app()->getLocale()])
+                            ?? $record->getFirstMedia('assets');
+
+                        if (! $media) {
+                            return null;
+                        }
+
+                        if ($media->hasGeneratedConversion('thumbnail')) {
+                            return $media->getUrl('thumbnail');
+                        }
+
+                        if (str_starts_with($media->mime_type, 'image/')) {
+                            return $media->getUrl();
+                        }
+
+                        return null;
+                    })
+                    ->square()
+                    ->height(40),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
