@@ -54,6 +54,11 @@ class FilamentFlexibleBlocksAssetManagerConfig
         return self::getConfig('navigation_group') ?? trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.navigation_group');
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return self::getConfig('navigation_sort');
+    }
+
     public static function getModel(): ?string
     {
         return self::getConfig('model');

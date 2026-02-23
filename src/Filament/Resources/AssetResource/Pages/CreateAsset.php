@@ -2,10 +2,10 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages;
 
-use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
+use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\FlexibleLocaleSwitcher;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Pages\CreateRecord\Concerns\TranslatableWithMedia;
 
 class CreateAsset extends CreateRecord
@@ -22,7 +22,7 @@ class CreateAsset extends CreateRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
+            FlexibleLocaleSwitcher::make(),
         ];
     }
 }

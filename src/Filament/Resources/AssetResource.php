@@ -2,14 +2,16 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources;
 
-use Filament\Forms\Components\Section;
-use Filament\Forms\Form;
-use Filament\Resources\Concerns\Translatable;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
+use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetMediaField;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetNameField;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\CopyUrlAction;
@@ -22,7 +24,7 @@ class AssetResource extends Resource
 {
     use Translatable;
 
-    protected static ?string $navigationIcon = 'heroicon-o-photo';
+    protected static string | \BackedEnum | null $navigationIcon = Heroicon::OutlinedPhoto;
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -51,6 +53,11 @@ class AssetResource extends Resource
         return FilamentFlexibleBlocksAssetManagerConfig::getNavigationGroup();
     }
 
+    public static function getNavigationSort(): ?int
+    {
+        return FilamentFlexibleBlocksAssetManagerConfig::getNavigationSort();
+    }
+
     public static function getDefaultComponents(): array
     {
         return [
@@ -60,12 +67,13 @@ class AssetResource extends Resource
         ];
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Section::make()
                     ->columns(2)
+                    ->columnSpanFull()
                     ->schema([
                         ...static::getDefaultComponents(),
                     ]),
@@ -101,12 +109,12 @@ class AssetResource extends Resource
                     ->label('')
                     ->view('laravel-filament-flexible-blocks-asset-manager::tables.columns.asset-preview'),
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
+            ->recordActions([
+                EditAction::make(),
                 CopyUrlAction::make(),
             ])
-            ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+            ->toolbarActions([
+                DeleteBulkAction::make(),
             ]);
     }
 

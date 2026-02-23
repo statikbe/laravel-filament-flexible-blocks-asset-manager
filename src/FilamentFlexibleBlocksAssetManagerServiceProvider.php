@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleBlocksAssetManager;
 use Filament\Support\Assets\Asset;
 use Filament\Support\Facades\FilamentAsset;
 use Filament\Support\Facades\FilamentIcon;
+use Filament\Support\Icons\Heroicon;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Gate;
@@ -131,12 +132,12 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
     }
 
     /**
-     * @return array<string>
+     * @return array<string|\BackedEnum>
      */
     protected function getIcons(): array
     {
         return [
-            'heroicon-o-photo',
+            Heroicon::OutlinedPhoto,
         ];
     }
 

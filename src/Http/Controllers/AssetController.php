@@ -4,9 +4,10 @@ namespace Statikbe\FilamentFlexibleBlocksAssetManager\Http\Controllers;
 
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
-use Spatie\MediaLibrary\HasMedia;
+use Illuminate\Support\Facades\Storage;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 
 class AssetController
 {
@@ -24,7 +25,7 @@ class AssetController
 
         $assetMedia = $this->getAssetMedia($asset, $locale);
 
-        if (! $assetMedia) {
+        if (! $assetMedia || ! Storage::disk($assetMedia->disk)->exists($assetMedia->getPathRelativeToRoot())) {
             abort(Response::HTTP_NOT_FOUND, trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.error.asset_media_not_found'));
         }
 
@@ -34,7 +35,7 @@ class AssetController
             ]);
     }
 
-    private function getAssetMedia(HasMedia $asset, ?string $locale = null): ?Media
+    private function getAssetMedia(Asset $asset, ?string $locale = null): ?Media
     {
         // TODO conversions
         $assetMedia = null;
