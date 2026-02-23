@@ -7,8 +7,8 @@ use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetMediaField;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetNameField;
@@ -80,8 +80,8 @@ class AssetResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->with('media'))
             ->columns([
-
                 TextColumn::make('name')
                     ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.form_component.name_lbl'))
                     ->limit(50)
@@ -99,36 +99,12 @@ class AssetResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('extension')
-                    ->label('Type')
-                    ->state(function ($record) {
-                        $media = $record->getFirstMedia('assets', ['locale' => app()->getLocale()])
-                            ?? $record->getFirstMedia('assets');
+                    ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.table.type_lbl'))
+                    ->state(fn ($record) => $record->getLocalizedAssetMedia()?->extension),
 
-                        return $media?->extension;
-                    }),
-
-                ImageColumn::make('preview')
+                ViewColumn::make('preview')
                     ->label('')
-                    ->getStateUsing(function ($record) {
-                        $media = $record->getFirstMedia('assets', ['locale' => app()->getLocale()])
-                            ?? $record->getFirstMedia('assets');
-
-                        if (! $media) {
-                            return null;
-                        }
-
-                        if ($media->hasGeneratedConversion('thumbnail')) {
-                            return $media->getUrl('thumbnail');
-                        }
-
-                        if (str_starts_with($media->mime_type, 'image/')) {
-                            return $media->getUrl();
-                        }
-
-                        return null;
-                    })
-                    ->square()
-                    ->height(40),
+                    ->view('laravel-filament-flexible-blocks-asset-manager::tables.columns.asset-preview'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
