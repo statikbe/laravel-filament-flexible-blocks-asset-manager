@@ -21,7 +21,7 @@
         <img
             x-ref="trigger"
             src="{{ $thumbnailUrl }}"
-            class="w-10 h-10 rounded-lg {{ $isImage ? 'object-cover' : 'object-contain' }} cursor-pointer"
+            style="width: 2.5rem; height: 2.5rem; border-radius: 0.5rem; cursor: pointer; object-fit: {{ $isImage ? 'cover' : 'contain' }};"
         />
 
         <div
@@ -29,11 +29,11 @@
             x-cloak
             x-float.placement.left.offset.flip.shift.teleport="{ offset: 8 }"
             x-transition.opacity.duration.150ms
-            class="absolute z-50 rounded-lg shadow-2xl p-2 bg-white dark:bg-gray-900 pointer-events-none"
+            style="position: absolute; z-index: 50; border-radius: 0.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); padding: 0.5rem; background: white; pointer-events: none;"
         >
             <img
                 src="{{ $previewUrl }}"
-                class="block max-w-96 max-h-96 object-contain"
+                style="display: block; max-width: 24rem; max-height: 24rem; object-fit: contain;"
             />
         </div>
     </div>

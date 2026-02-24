@@ -32,10 +32,12 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
     {
         $this->addMediaConversion('thumbnail')
             ->fit(Fit::Contain, 300, 300)
+            ->pdfPageNumber(1)
             ->nonQueued();
 
         $this->addMediaConversion('preview')
             ->fit(Fit::Contain, 1024, 1024)
+            ->pdfPageNumber(1)
             ->nonQueued();
     }
 
