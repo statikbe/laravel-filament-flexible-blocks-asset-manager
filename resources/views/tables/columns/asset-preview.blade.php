@@ -27,32 +27,14 @@
         <div
             x-ref="panel"
             x-cloak
-            x-float.placement.left.offset.flip.shift.teleport="{ offset: 8 }"
+            x-float.placement.left.offset.flip.shift.teleport="{ offset: 8, shift: { crossAxis: true, padding: 8 } }"
             x-transition.opacity.duration.150ms
-            class="fi-asset-preview-panel"
+            style="position: absolute; z-index: 50; pointer-events: none;"
         >
             <img
                 src="{{ $previewUrl }}"
-                style="display: block; max-width: 24rem; max-height: 24rem; object-fit: contain;"
+                style="display: block; max-width: 24rem; max-height: 24rem; object-fit: contain; border-radius: 0.5rem;"
             />
         </div>
     </div>
-
-    @once
-        <style>
-            .fi-asset-preview-panel {
-                position: absolute;
-                z-index: 50;
-                border-radius: 0.5rem;
-                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-                padding: 0.5rem;
-                background: white;
-                pointer-events: none;
-            }
-
-            .dark .fi-asset-preview-panel {
-                background: rgb(17 24 39); /* gray-900 */
-            }
-        </style>
-    @endonce
 @endif
