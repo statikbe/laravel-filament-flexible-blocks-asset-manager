@@ -29,7 +29,7 @@
             x-cloak
             x-float.placement.left.offset.flip.shift.teleport="{ offset: 8 }"
             x-transition.opacity.duration.150ms
-            style="position: absolute; z-index: 50; border-radius: 0.5rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); padding: 0.5rem; background: white; pointer-events: none;"
+            class="fi-asset-preview-panel"
         >
             <img
                 src="{{ $previewUrl }}"
@@ -37,4 +37,22 @@
             />
         </div>
     </div>
+
+    @once
+        <style>
+            .fi-asset-preview-panel {
+                position: absolute;
+                z-index: 50;
+                border-radius: 0.5rem;
+                box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+                padding: 0.5rem;
+                background: white;
+                pointer-events: none;
+            }
+
+            .dark .fi-asset-preview-panel {
+                background: rgb(17 24 39); /* gray-900 */
+            }
+        </style>
+    @endonce
 @endif
