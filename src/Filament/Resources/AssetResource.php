@@ -102,7 +102,7 @@ class AssetResource extends Resource
                     ->sortable(),
 
                 TextColumn::make('extension')
-                    ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.table.type_lbl'))
+                    ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.table.extension_lbl'))
                     ->state(fn ($record) => $record->getLocalizedAssetMedia()?->extension),
 
                 ViewColumn::make('preview')

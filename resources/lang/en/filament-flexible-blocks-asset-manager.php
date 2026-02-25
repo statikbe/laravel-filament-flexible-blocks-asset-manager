@@ -7,7 +7,9 @@ return [
     'form_component.name_lbl' => 'Name',
     'form_component.asset_media_lbl' => 'File',
     'navigation_group' => 'Settings',
-    'table.type_lbl' => 'Type',
+    'table' => [
+        'extension_lbl' => 'Extension',
+    ],
     'error' => [
         'asset_media_not_found' => 'The asset media was not found',
     ],
