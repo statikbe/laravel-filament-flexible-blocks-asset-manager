@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-blocks-asset-manager` will be documented in this file.
 
+## v4.0.2 - 2026-02-25
+
+### What's Changed
+
+* Feature/asset table preview by @lukasdewijn in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/17
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/compare/v4.0.1...v4.0.2
+
 ## v4.0.1 - 2026-02-17
 
 - Fix column span of section in asset resource
