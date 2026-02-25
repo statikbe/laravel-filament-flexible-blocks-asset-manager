@@ -50,6 +50,16 @@ Optionally, you can publish the translations using
 php artisan vendor:publish --tag="filament-flexible-blocks-asset-manager-translations"
 ```
 
+### PDF thumbnail previews
+
+To enable thumbnail previews for PDF assets in the table, you need to install `spatie/pdf-to-image`:
+
+```bash
+composer require spatie/pdf-to-image
+```
+
+This requires **Imagick** and **Ghostscript** to be installed on your server. See the [spatie/pdf-to-image documentation](https://github.com/spatie/pdf-to-image) for more details.
+
 ### Setup with the Filament Flexible Content Blocks package
 
 To integrate the plugin with Filament, you need to add it a panel in the filament service provider. See the code sample below:

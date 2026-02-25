@@ -9,6 +9,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
 use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetMediaField;
@@ -82,6 +83,7 @@ class AssetResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->with('media'))
             ->columns([
                 TextColumn::make('name')
                     ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.form_component.name_lbl'))
@@ -98,6 +100,14 @@ class AssetResource extends Resource
                     })
                     ->searchable()
                     ->sortable(),
+
+                TextColumn::make('extension')
+                    ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.table.type_lbl'))
+                    ->state(fn ($record) => $record->getLocalizedAssetMedia()?->extension),
+
+                ViewColumn::make('preview')
+                    ->label('')
+                    ->view('laravel-filament-flexible-blocks-asset-manager::tables.columns.asset-preview'),
             ])
             ->recordActions([
                 EditAction::make(),

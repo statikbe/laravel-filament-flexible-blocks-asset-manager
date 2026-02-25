@@ -31,15 +31,26 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumbnail')
+            ->pdfPageNumber(1)
             ->nonQueued()
             ->fit(Fit::Contain, 300, 300);
-        // TODO configurable conversions.
+
+        $this->addMediaConversion('preview')
+            ->pdfPageNumber(1)
+            ->nonQueued()
+            ->fit(Fit::Contain, 1024, 1024);
     }
 
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection($this->getAssetCollection());
         $this->mergeTranslatableMediaCollection([$this->getAssetCollection()]);
+    }
+
+    public function getLocalizedAssetMedia(): ?Media
+    {
+        return $this->getFirstMedia(self::MEDIA_COLLECTION_ASSETS, ['locale' => app()->getLocale()])
+            ?? $this->getFirstMedia(self::MEDIA_COLLECTION_ASSETS);
     }
 
     public function getAssetCollection(): string
