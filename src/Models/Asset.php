@@ -47,10 +47,20 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
         $this->mergeTranslatableMediaCollection([$this->getAssetCollection()]);
     }
 
-    public function getLocalizedAssetMedia(): ?Media
+    public function getLocalizedAssetMedia(?string $locale = null): ?Media
     {
-        return $this->getFirstMedia(self::MEDIA_COLLECTION_ASSETS, ['locale' => app()->getLocale()])
-            ?? $this->getFirstMedia(self::MEDIA_COLLECTION_ASSETS);
+        if (! $locale && FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()) {
+            $locale = app()->getLocale();
+        }
+
+        if ($locale) {
+            $media = $this->getFirstMedia(self::MEDIA_COLLECTION_ASSETS, ['locale' => $locale]);
+            if ($media) {
+                return $media;
+            }
+        }
+
+        return $this->getFirstMedia(self::MEDIA_COLLECTION_ASSETS);
     }
 
     public function getAssetCollection(): string

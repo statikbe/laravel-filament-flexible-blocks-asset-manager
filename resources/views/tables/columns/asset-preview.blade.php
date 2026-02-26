@@ -21,6 +21,7 @@
         <img
             x-ref="trigger"
             src="{{ $thumbnailUrl }}"
+            alt="{{ $record->name }}"
             style="width: 2.5rem; height: 2.5rem; border-radius: 0.5rem; cursor: pointer; object-fit: {{ $isImage ? 'cover' : 'contain' }};"
         />
 
@@ -33,6 +34,7 @@
         >
             <img
                 src="{{ $previewUrl }}"
+                alt="{{ $record->name }}"
                 style="display: block; max-width: 24rem; max-height: 24rem; object-fit: contain; border-radius: 0.5rem;"
             />
         </div>

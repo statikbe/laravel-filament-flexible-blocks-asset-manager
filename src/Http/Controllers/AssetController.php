@@ -38,20 +38,6 @@ class AssetController
     private function getAssetMedia(Asset $asset, ?string $locale = null): ?Media
     {
         // TODO conversions
-        $assetMedia = null;
-        if (! $locale && FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()) {
-            $locale = app()->getLocale();
-        }
-
-        // first try with locale
-        $filters = ['locale' => $locale];
-        $assetMedia = $asset->getFirstMedia($asset->getAssetCollection(), $filters);
-
-        if (! $assetMedia) {
-            // if no media with locale try fallback:
-            $assetMedia = $asset->getFirstMedia($asset->getAssetCollection());
-        }
-
-        return $assetMedia;
+        return $asset->getLocalizedAssetMedia($locale);
     }
 }
