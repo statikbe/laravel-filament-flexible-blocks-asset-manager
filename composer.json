@@ -35,6 +35,9 @@
         "spatie/laravel-package-tools": "^1.19.0",
         "statikbe/laravel-filament-flexible-content-blocks": "^3.0"
     },
+    "suggest": {
+        "spatie/pdf-to-image": "Required for PDF thumbnail previews in the asset table (needs Imagick + Ghostscript)"
+    },
     "require-dev": {
         "laravel/pint": "^1.0",
         "nunomaduro/collision": "^7.9",

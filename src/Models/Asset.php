@@ -31,15 +31,36 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
     public function registerMediaConversions(?Media $media = null): void
     {
         $this->addMediaConversion('thumbnail')
-            ->nonQueued()
-            ->fit(Fit::Contain, 300, 300);
-        // TODO configurable conversions.
+            ->fit(Fit::Contain, 300, 300)
+            ->pdfPageNumber(1)
+            ->nonQueued();
+
+        $this->addMediaConversion('preview')
+            ->fit(Fit::Contain, 1024, 1024)
+            ->pdfPageNumber(1)
+            ->nonQueued();
     }
 
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection($this->getAssetCollection());
         $this->mergeTranslatableMediaCollection([$this->getAssetCollection()]);
+    }
+
+    public function getLocalizedAssetMedia(?string $locale = null): ?Media
+    {
+        if (! $locale && FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()) {
+            $locale = app()->getLocale();
+        }
+
+        if ($locale) {
+            $media = $this->getFirstMedia(self::MEDIA_COLLECTION_ASSETS, ['locale' => $locale]);
+            if ($media) {
+                return $media;
+            }
+        }
+
+        return $this->getFirstMedia(self::MEDIA_COLLECTION_ASSETS);
     }
 
     public function getAssetCollection(): string
