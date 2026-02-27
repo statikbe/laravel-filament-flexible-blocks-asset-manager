@@ -2,8 +2,8 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\Concerns;
 
-use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\TextInput\Actions\CopyAction;
 use Filament\Support\Icons\Heroicon;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 
@@ -31,14 +31,9 @@ trait HasCopyUrlAction
                             'x-on:click' => '$el.select()',
                         ])
                         ->suffixAction(
-                            Action::make('copy')
+                            CopyAction::make()
                                 ->icon(Heroicon::OutlinedClipboard)
-                                ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.action.copy'))
-                                ->alpineClickHandler('
-                                    const input = $el.closest(".fi-input-wrp").querySelector("input");
-                                    navigator.clipboard.writeText(input.value);
-                                    $tooltip("' . trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.action.url_copied') . '");
-                                ')
+                                ->copyMessage(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.action.url_copied'))
                         ),
                 ];
             });

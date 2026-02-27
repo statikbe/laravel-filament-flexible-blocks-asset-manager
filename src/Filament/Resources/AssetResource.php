@@ -13,6 +13,7 @@ use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
 use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetMediaField;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetCustomFileNameField;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetNameField;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\CopyUrlAction;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages\CreateAsset;
@@ -62,6 +63,7 @@ class AssetResource extends Resource
     {
         return [
             AssetNameField::create(true),
+            AssetCustomFileNameField::create(),
             AssetMediaField::create(FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets())
                 ->required(),
         ];

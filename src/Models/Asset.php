@@ -15,6 +15,7 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
 /**
  * @property string $name
+ * @property string|null $custom_file_name
  */
 class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
 {
@@ -69,6 +70,22 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
             'assetId' => $this,
             'locale' => $locale,
         ]);
+    }
+
+    public function getDownloadFileName(): ?string
+    {
+        if (! $this->custom_file_name) {
+            return null;
+        }
+
+        $media = $this->getLocalizedAssetMedia();
+        $extension = $media?->extension;
+
+        if ($extension) {
+            return $this->custom_file_name . '.' . $extension;
+        }
+
+        return $this->custom_file_name;
     }
 
     public function getPreviewUrl(?string $locale = null): string
