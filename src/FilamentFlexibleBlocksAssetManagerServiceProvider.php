@@ -167,6 +167,7 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
         return [
             'create_assets_table',
             'add_custom_file_name_to_assets_table',
+            'add_use_custom_file_name_to_assets_table',
         ];
     }
 }

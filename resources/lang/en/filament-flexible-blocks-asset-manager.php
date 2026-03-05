@@ -5,6 +5,7 @@ return [
     'asset_lbl' => 'Asset',
     'asset_plural_lbl' => 'Assets',
     'form_component.name_lbl' => 'Name',
+    'form_component.has_custom_file_name_lbl' => 'Use custom file name for download',
     'form_component.custom_file_name_lbl' => 'Custom file name',
     'form_component.asset_media_lbl' => 'File',
     'navigation_group' => 'Settings',
@@ -20,5 +21,6 @@ return [
         'asset_url' => 'Asset URL',
         'copy' => 'Copy',
         'url_copied' => 'URL copied!',
+        'download' => 'Download file',
     ],
 ];

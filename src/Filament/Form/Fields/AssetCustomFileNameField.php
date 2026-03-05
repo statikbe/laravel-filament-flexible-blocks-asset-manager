@@ -3,17 +3,28 @@
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields;
 
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Group;
 
-class AssetCustomFileNameField extends TextInput
+class AssetCustomFileNameField extends Group
 {
     const FIELD = 'custom_file_name';
+
+    const TOGGLE = 'use_custom_file_name';
 
     public static function create(): static
     {
         $field = self::FIELD;
 
-        return static::make($field)
-            ->label(trans("filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.form_component.{$field}_lbl"))
-            ->maxLength(255);
+        return static::make([
+            Toggle::make(self::TOGGLE)
+                ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.form_component.has_custom_file_name_lbl'))
+                ->live(),
+
+            TextInput::make($field)
+                ->label(trans("filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.form_component.{$field}_lbl"))
+                ->maxLength(255)
+                ->visible(fn ($get) => $get(self::TOGGLE)),
+        ]);
     }
 }

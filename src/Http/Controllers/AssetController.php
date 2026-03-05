@@ -46,8 +46,8 @@ class AssetController
             ? (Storage::disk($disk)->mimeType($path) ?: $assetMedia->mime_type)
             : $assetMedia->mime_type;
 
-        // Resolve download filename (uses the served file's extension, not the original's)
-        $downloadFileName = $this->resolveDownloadFileName($asset, $path);
+        // Get download filename (file name or custom file name)
+        $downloadFileName = $asset->getDownloadFileName();
 
         if ($downloadFileName || $conversion) {
             return $this->createStreamedResponse($disk, $path, $mimeType, $downloadFileName);
@@ -82,25 +82,10 @@ class AssetController
             $pathGenerator = PathGeneratorFactory::create($media);
             $conversionObj = ConversionCollection::createForMedia($media)->getByName($conversion);
 
-            return $pathGenerator->getPathForConversions($media).$conversionObj->getConversionFile($media);
+            return $pathGenerator->getPathForConversions($media) . $conversionObj->getConversionFile($media);
         }
 
         return $media->getPathRelativeToRoot();
-    }
-
-    private function resolveDownloadFileName(Asset $asset, string $filePath): ?string
-    {
-        if (! $asset->custom_file_name) {
-            return null;
-        }
-
-        $extension = pathinfo($filePath, PATHINFO_EXTENSION);
-
-        if ($extension) {
-            return $asset->custom_file_name.'.'.$extension;
-        }
-
-        return $asset->custom_file_name;
     }
 
     private function createStreamedResponse(string $disk, string $path, string $mimeType, ?string $downloadFileName = null): StreamedResponse
@@ -111,7 +96,7 @@ class AssetController
         ];
 
         if ($downloadFileName) {
-            $headers['Content-Disposition'] = 'inline; filename="'.$downloadFileName.'"';
+            $headers['Content-Disposition'] = 'inline; filename="' . $downloadFileName . '"';
         }
 
         return new StreamedResponse(function () use ($disk, $path) {

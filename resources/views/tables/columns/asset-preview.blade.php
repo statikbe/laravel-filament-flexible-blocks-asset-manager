@@ -14,6 +14,7 @@
 
 @if($thumbnailUrl)
     <div
+        style="padding-left: 3rem;"
         x-data
         x-on:mouseenter="$refs.panel.open($refs.trigger)"
         x-on:mouseleave="$refs.panel.close()"
@@ -37,4 +38,14 @@
             />
         </div>
     </div>
+    @else
+    <div style="position: relative; width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; margin-left: 3rem;">
+        <x-heroicon-o-document style="width: 2.5rem; height: 2.5rem; color: #212121;" />
+        @if($media?->extension)
+            <span style="position: absolute; font-size: 0.4rem; font-weight: bold; text-transform: uppercase; color: #212121; margin-top: 0.25rem;">
+                {{ $media->extension }}
+            </span>
+        @endif
+    </div>
+
 @endif
