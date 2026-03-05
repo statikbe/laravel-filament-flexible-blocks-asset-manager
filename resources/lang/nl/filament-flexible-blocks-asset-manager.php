@@ -5,6 +5,8 @@ return [
     'asset_lbl' => 'Bestand',
     'asset_plural_lbl' => 'Bestanden',
     'form_component.name_lbl' => 'Naam',
+    'form_component.has_custom_file_name_lbl' => 'Aangepaste bestandsnaam voor download',
+    'form_component.custom_file_name_lbl' => 'Aangepaste bestandsnaam',
     'form_component.asset_media_lbl' => 'Bestand',
     'navigation_group' => 'Instellingen',
     'table' => [
@@ -19,5 +21,6 @@ return [
         'asset_url' => 'Bestand URL',
         'copy' => 'Kopieer',
         'url_copied' => 'URL gekopieerd!',
+        'download' => 'Bestand downloaden',
     ],
 ];

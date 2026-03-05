@@ -15,6 +15,8 @@ use Statikbe\FilamentFlexibleContentBlocks\Models\Contracts\Linkable;
 
 /**
  * @property string $name
+ * @property string|null $custom_file_name
+ * @property bool $use_custom_file_name
  */
 class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
 {
@@ -27,6 +29,10 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
     public $translatable = ['name'];
 
     public $guarded = [];
+
+    protected $casts = [
+        'use_custom_file_name' => 'boolean',
+    ];
 
     public function registerMediaConversions(?Media $media = null): void
     {
@@ -69,6 +75,33 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
             'assetId' => $this,
             'locale' => $locale,
         ]);
+    }
+
+    public function getDownloadFileName(): ?string
+    {
+        $media = $this->getLocalizedAssetMedia();
+        $extension = $media?->extension;
+
+        if (! $this->use_custom_file_name || ! $this->custom_file_name) {
+            return self::buildSafeFileName($this->name, $extension);
+        }
+
+        return $this->buildSafeFileName($this->custom_file_name, $extension);
+    }
+
+    public static function buildSafeFileName(string $filename, string $extension): string
+    {
+        $filename = str_replace('..', '', $filename);
+        $filename = preg_replace('/[\/\\\\;&`<>\x00|]/', '', $filename);
+
+        $filename_extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
+        $name = pathinfo($filename, PATHINFO_FILENAME);
+
+        if ($filename_extension === $extension || $filename_extension === '') {
+            return $name . '.' . $extension;
+        }
+
+        return $name . '.' . $filename_extension . '.' . $extension;
     }
 
     public function getPreviewUrl(?string $locale = null): string
