@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('assets', function (Blueprint $table) {
-            $table->string('custom_file_name')->nullable();
+            $table->json('custom_file_name')->nullable();
             $table->boolean('use_custom_file_name')->default(false);
         });
     }

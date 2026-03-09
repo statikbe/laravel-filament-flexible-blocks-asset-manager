@@ -26,7 +26,7 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
 
     const MEDIA_COLLECTION_ASSETS = 'assets';
 
-    public $translatable = ['name'];
+    public $translatable = ['name', 'custom_file_name'];
 
     public $guarded = [];
 
