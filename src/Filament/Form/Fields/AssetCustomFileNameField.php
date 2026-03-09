@@ -18,8 +18,6 @@ class AssetCustomFileNameField extends Group
 
     const TOGGLE = 'use_custom_file_name';
 
-
-
     public static function create(): static
     {
         $field = self::FIELD;
