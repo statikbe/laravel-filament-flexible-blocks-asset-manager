@@ -6,12 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
-use Spatie\MediaLibrary\Conversions\ConversionCollection;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-use Spatie\MediaLibrary\Support\PathGenerator\PathGeneratorFactory;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class AssetController
 {
@@ -39,24 +36,15 @@ class AssetController
             $conversion = null;
         }
 
-        // Resolve disk, path, and mime type for the file being served
-        $disk = $conversion ? $assetMedia->conversions_disk : $assetMedia->disk;
-        $path = $this->getMediaPath($assetMedia, $conversion);
-        $mimeType = $conversion
-            ? (Storage::disk($disk)->mimeType($path) ?: $assetMedia->mime_type)
-            : $assetMedia->mime_type;
-
-        // Get download filename (file name or custom file name)
         $downloadFileName = $asset->getDownloadFileName();
-
-        if ($downloadFileName || $conversion) {
-            return $this->createStreamedResponse($disk, $path, $mimeType, $downloadFileName);
+        if ($downloadFileName) {
+            $assetMedia->file_name = $downloadFileName;
         }
 
         return $assetMedia
-            ->setCustomHeaders([
-                'X-Robots-Tag' => 'none', // equivalent to noindex, nofollow.
-            ]);
+            ->toInlineResponse($request, $conversion ?? '')
+            ->withHeaders(['X-Robots-Tag' => 'none']);
+
     }
 
     private function getAssetMedia(Asset $asset, ?string $locale = null): ?Media
@@ -74,37 +62,5 @@ class AssetController
         }
 
         return $assetMedia;
-    }
-
-    private function getMediaPath(Media $media, ?string $conversion): string
-    {
-        if ($conversion) {
-            $pathGenerator = PathGeneratorFactory::create($media);
-            $conversionObj = ConversionCollection::createForMedia($media)->getByName($conversion);
-
-            return $pathGenerator->getPathForConversions($media) . $conversionObj->getConversionFile($media);
-        }
-
-        return $media->getPathRelativeToRoot();
-    }
-
-    private function createStreamedResponse(string $disk, string $path, string $mimeType, ?string $downloadFileName = null): StreamedResponse
-    {
-        $headers = [
-            'Content-Type' => $mimeType,
-            'X-Robots-Tag' => 'none',
-        ];
-
-        if ($downloadFileName) {
-            $headers['Content-Disposition'] = 'inline; filename="' . $downloadFileName . '"';
-        }
-
-        return new StreamedResponse(function () use ($disk, $path) {
-            $stream = Storage::disk($disk)->readStream($path);
-            fpassthru($stream);
-            if (is_resource($stream)) {
-                fclose($stream);
-            }
-        }, 200, $headers);
     }
 }

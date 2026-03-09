@@ -80,10 +80,15 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
     public function getDownloadFileName(): ?string
     {
         $media = $this->getLocalizedAssetMedia();
-        $extension = $media?->extension;
+
+        if (! $media) {
+            return null;
+        }
+
+        $extension = $media->extension;
 
         if (! $this->use_custom_file_name || ! $this->custom_file_name) {
-            return self::buildSafeFileName($this->name, $extension);
+            return $media->file_name;
         }
 
         return $this->buildSafeFileName($this->custom_file_name, $extension);
@@ -91,6 +96,7 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
 
     public static function buildSafeFileName(string $filename, string $extension): string
     {
+        // Strip directory traversal and dangerous characters: / \ ; & ` < > NULL |
         $filename = str_replace('..', '', $filename);
         $filename = preg_replace('/[\/\\\\;&`<>\x00|]/', '', $filename);
 

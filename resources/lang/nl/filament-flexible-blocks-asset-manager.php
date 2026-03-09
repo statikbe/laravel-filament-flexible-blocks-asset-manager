@@ -1,13 +1,17 @@
 <?php
 
 return [
-    'asset_nav_lbl' => 'Bestanden',
-    'asset_lbl' => 'Bestand',
-    'asset_plural_lbl' => 'Bestanden',
-    'form_component.name_lbl' => 'Naam',
-    'form_component.has_custom_file_name_lbl' => 'Aangepaste bestandsnaam voor download',
-    'form_component.custom_file_name_lbl' => 'Aangepaste bestandsnaam',
-    'form_component.asset_media_lbl' => 'Bestand',
+    'asset' => [
+        'nav_lbl' => 'Bestanden',
+        'lbl' => 'Bestand',
+        'plural_lbl' => 'Bestanden',
+    ],
+    'form_component' => [
+        'name_lbl' => 'Naam',
+        'has_custom_file_name_lbl' => 'Aangepaste bestandsnaam voor download',
+        'custom_file_name_lbl' => 'Aangepaste bestandsnaam',
+        'asset_media_lbl' => 'Bestand',
+    ],
     'navigation_group' => 'Instellingen',
     'table' => [
         'extension_lbl' => 'Extensie',

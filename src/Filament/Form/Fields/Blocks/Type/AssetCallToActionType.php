@@ -14,7 +14,7 @@ class AssetCallToActionType extends CallToActionType
 
         $this->titleColumnName('name');
         $this->model(FilamentFlexibleBlocksAssetManagerConfig::getModel());
-        $this->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset_lbl'));
+        $this->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset.lbl'));
 
         $this->searchColumns(['name']);
         $this->getOptionLabelFromRecordUsing(function (Asset $record, ?string $locale) {

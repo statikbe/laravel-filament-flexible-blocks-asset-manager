@@ -10,6 +10,7 @@ return new class extends Migration
     {
         Schema::table('assets', function (Blueprint $table) {
             $table->string('custom_file_name')->nullable();
+            $table->boolean('use_custom_file_name')->default(false);
         });
     }
 };

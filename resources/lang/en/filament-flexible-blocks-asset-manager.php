@@ -1,13 +1,17 @@
 <?php
 
 return [
-    'asset_nav_lbl' => 'Assets',
-    'asset_lbl' => 'Asset',
-    'asset_plural_lbl' => 'Assets',
-    'form_component.name_lbl' => 'Name',
-    'form_component.has_custom_file_name_lbl' => 'Use custom file name for download',
-    'form_component.custom_file_name_lbl' => 'Custom file name',
-    'form_component.asset_media_lbl' => 'File',
+    'asset' => [
+        'nav_lbl' => 'Assets',
+        'lbl' => 'Asset',
+        'plural_lbl' => 'Assets',
+    ],
+    'form_component' => [
+        'name_lbl' => 'Name',
+        'has_custom_file_name_lbl' => 'Use custom file name for download',
+        'custom_file_name_lbl' => 'Custom file name',
+        'asset_media_lbl' => 'File',
+    ],
     'navigation_group' => 'Settings',
     'table' => [
         'extension_lbl' => 'Extension',

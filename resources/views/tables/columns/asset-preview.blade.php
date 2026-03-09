@@ -38,14 +38,13 @@
             />
         </div>
     </div>
-    @else
+@else
     <div style="position: relative; width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; margin-left: 3rem;">
-        <x-heroicon-o-document style="width: 2.5rem; height: 2.5rem; color: #212121;" />
+        <x-heroicon-o-document class="text-gray-400 dark:text-gray-500" style="width: 2.5rem; height: 2.5rem;" />
         @if($media?->extension)
-            <span style="position: absolute; font-size: 0.4rem; font-weight: bold; text-transform: uppercase; color: #212121; margin-top: 0.25rem;">
+            <span class="text-gray-400 dark:text-gray-500" style="position: absolute; font-size: 0.4rem; font-weight: bold; text-transform: uppercase; margin-top: 0.25rem;">
                 {{ $media->extension }}
             </span>
         @endif
     </div>
-
 @endif
