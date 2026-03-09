@@ -5,6 +5,7 @@ namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -12,9 +13,11 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
 use LaraZeus\SpatieTranslatable\Resources\Concerns\Translatable;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetCustomFileNameField;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetMediaField;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Form\Fields\AssetNameField;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\CopyUrlAction;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\DownloadAssetAction;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages\CreateAsset;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages\EditAsset;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Pages\ListAssets;
@@ -61,9 +64,14 @@ class AssetResource extends Resource
     public static function getDefaultComponents(): array
     {
         return [
-            AssetNameField::create(true),
+            Group::make([
+                AssetNameField::create(true),
+                AssetCustomFileNameField::create(),
+            ])->columnSpan(1),
+
             AssetMediaField::create(FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets())
-                ->required(),
+                ->required()
+                ->columnSpan(1),
         ];
     }
 
@@ -85,6 +93,10 @@ class AssetResource extends Resource
         return $table
             ->modifyQueryUsing(fn ($query) => $query->with('media'))
             ->columns([
+                ViewColumn::make('preview')
+                    ->label('')
+                    ->view('laravel-filament-flexible-blocks-asset-manager::tables.columns.asset-preview'),
+
                 TextColumn::make('name')
                     ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.form_component.name_lbl'))
                     ->limit(50)
@@ -105,13 +117,11 @@ class AssetResource extends Resource
                     ->label(trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.table.extension_lbl'))
                     ->state(fn ($record) => $record->getLocalizedAssetMedia()?->extension),
 
-                ViewColumn::make('preview')
-                    ->label('')
-                    ->view('laravel-filament-flexible-blocks-asset-manager::tables.columns.asset-preview'),
             ])
             ->recordActions([
                 EditAction::make(),
                 CopyUrlAction::make(),
+                DownloadAssetAction::make(),
             ])
             ->toolbarActions([
                 DeleteBulkAction::make(),
