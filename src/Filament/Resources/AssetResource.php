@@ -27,23 +27,23 @@ class AssetResource extends Resource
 {
     use Translatable;
 
-    protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
+    protected static string | \BackedEnum | null $navigationIcon = Heroicon::OutlinedPhoto;
 
     protected static ?string $recordTitleAttribute = 'name';
 
     public static function getNavigationLabel(): string
     {
-        return trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset.nav_lbl');
+        return trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset_nav_lbl');
     }
 
     public static function getLabel(): string
     {
-        return trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset.lbl');
+        return trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset_lbl');
     }
 
     public static function getPluralLabel(): string
     {
-        return trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset.plural_lbl');
+        return trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.asset_plural_lbl');
     }
 
     public static function getModel(): string

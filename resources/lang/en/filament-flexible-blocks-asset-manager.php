@@ -1,11 +1,9 @@
 <?php
 
 return [
-    'asset' => [
-        'nav_lbl' => 'Assets',
-        'lbl' => 'Asset',
-        'plural_lbl' => 'Assets',
-    ],
+    'asset_nav_lbl' => 'Assets',
+    'asset_lbl' => 'Asset',
+    'asset_plural_lbl' => 'Assets',
     'form_component' => [
         'name_lbl' => 'Name',
         'has_custom_file_name_lbl' => 'Use custom file name for download',

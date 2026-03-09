@@ -1,11 +1,9 @@
 <?php
 
 return [
-    'asset' => [
-        'nav_lbl' => 'Ressources multimédia',
-        'lbl' => 'Ressource multimédia',
-        'plural_lbl' => 'Ressources multimédia',
-    ],
+    'asset_nav_lbl' => 'Ressources multimédia',
+    'asset_lbl' => 'Ressource multimédia',
+    'asset_plural_lbl' => 'Ressources multimédia',
     'form_component' => [
         'name_lbl' => 'Nom',
         'has_custom_file_name_lbl' => 'Utiliser un nom de fichier personnalisé pour le téléchargement',

@@ -1,11 +1,9 @@
 <?php
 
 return [
-    'asset' => [
-        'nav_lbl' => 'Bestanden',
-        'lbl' => 'Bestand',
-        'plural_lbl' => 'Bestanden',
-    ],
+    'asset_nav_lbl' => 'Bestanden',
+    'asset_lbl' => 'Bestand',
+    'asset_plural_lbl' => 'Bestanden',
     'form_component' => [
         'name_lbl' => 'Naam',
         'has_custom_file_name_lbl' => 'Aangepaste bestandsnaam voor download',
