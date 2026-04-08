@@ -40,9 +40,9 @@
     </div>
 @else
     <div style="position: relative; width: 2.5rem; height: 2.5rem; display: flex; align-items: center; justify-content: center; margin-left: 3rem;">
-        <x-heroicon-o-document class="text-gray-400 dark:text-gray-500" style="width: 2.5rem; height: 2.5rem;" />
+        <x-heroicon-o-document/>
         @if($media?->extension)
-            <span class="text-gray-400 dark:text-gray-500" style="position: absolute; font-size: 0.4rem; font-weight: bold; text-transform: uppercase; margin-top: 0.25rem;">
+            <span style="position: absolute; font-size: 0.4rem; font-weight: bold; text-transform: uppercase; margin-top: 0.25rem;">
                 {{ $media->extension }}
             </span>
         @endif

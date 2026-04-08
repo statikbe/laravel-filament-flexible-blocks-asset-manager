@@ -67,11 +67,10 @@ class AssetResource extends Resource
             Group::make([
                 AssetNameField::create(true),
                 AssetCustomFileNameField::create(),
-            ])->columnSpan(1),
+            ]),
 
             AssetMediaField::create(FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets())
-                ->required()
-                ->columnSpan(1),
+                ->required(),
         ];
     }
 

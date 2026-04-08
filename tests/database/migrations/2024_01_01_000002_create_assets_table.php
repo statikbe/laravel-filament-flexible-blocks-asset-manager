@@ -11,6 +11,8 @@ return new class extends Migration
         Schema::create('assets', function (Blueprint $table) {
             $table->id();
             $table->json('name')->nullable();
+            $table->json('custom_file_name')->nullable();
+            $table->boolean('use_custom_file_name')->default(false);
             $table->timestamps();
         });
     }
