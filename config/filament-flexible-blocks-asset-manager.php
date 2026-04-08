@@ -1,5 +1,8 @@
 <?php
 
+use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
+
 // config for Statik/FilamentFlexibleBlocksAssetManager
 
 return [
@@ -39,8 +42,8 @@ return [
     |
     | You can override the model and resource that are used. Be sure to inherit from our defaults.
     */
-    'model' => \Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset::class,
-    'resource' => \Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource::class,
+    'model' => Asset::class,
+    'resource' => AssetResource::class,
 
     /*
     |--------------------------------------------------------------------------
