@@ -5,7 +5,8 @@ namespace Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetRe
 use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource;
-use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\CopyUrlHeaderAction;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\CopyUrlAction;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource\Actions\DownloadAssetAction;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerConfig;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Actions\FlexibleLocaleSwitcher;
 use Statikbe\FilamentFlexibleContentBlocks\Filament\Pages\EditRecord\Concerns\TranslatableWithMedia;
@@ -25,8 +26,9 @@ class EditAsset extends EditRecord
     {
         return [
             FlexibleLocaleSwitcher::make(),
-            CopyUrlHeaderAction::make(),
+            CopyUrlAction::make(),
             DeleteAction::make(),
+            DownloadAssetAction::make(),
         ];
     }
 }

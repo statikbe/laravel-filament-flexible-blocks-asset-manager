@@ -24,7 +24,8 @@ class AssetMediaField extends ImageField
                 /** @var Asset $record */
                 return $record->getAssetCollection();
             })
-            ->conversion('thumbnail');
+            ->conversion('thumbnail')
+            ->preserveFilenames();
 
         $acceptedFileTypes = FilamentFlexibleBlocksAssetManagerConfig::getAcceptedFileTypes();
         if (! empty($acceptedFileTypes)) {

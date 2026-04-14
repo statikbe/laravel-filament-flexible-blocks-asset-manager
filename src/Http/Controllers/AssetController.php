@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -11,7 +12,7 @@ use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 
 class AssetController
 {
-    public function index(string $assetId, ?string $locale = null)
+    public function index(Request $request, string $assetId, ?string $locale = null)
     {
         $asset = FilamentFlexibleBlocksAssetManagerConfig::getModel()::findOrFail($assetId);
 
@@ -29,23 +30,31 @@ class AssetController
             abort(Response::HTTP_NOT_FOUND, trans('filament-flexible-blocks-asset-manager::filament-flexible-blocks-asset-manager.error.asset_media_not_found'));
         }
 
+        // Resolve conversion (silently ignore invalid/ungenerated conversions)
+        $conversion = $request->query('conversion');
+        if ($conversion && ! $assetMedia->hasGeneratedConversion($conversion)) {
+            $conversion = null;
+        }
+
+        $downloadFileName = $asset->getDownloadFileName();
+        if ($downloadFileName) {
+            $assetMedia->file_name = $downloadFileName;
+        }
+
         return $assetMedia
-            ->setCustomHeaders([
-                'X-Robots-Tag' => 'none', // equivalent to noindex, nofollow.
-            ]);
+            ->toInlineResponse($request, $conversion ?? '')
+            ->withHeaders(['X-Robots-Tag' => 'none']);
+
     }
 
     private function getAssetMedia(Asset $asset, ?string $locale = null): ?Media
     {
-        // TODO conversions
-        $assetMedia = null;
         if (! $locale && FilamentFlexibleBlocksAssetManagerConfig::hasTranslatableAssets()) {
             $locale = app()->getLocale();
         }
 
         // first try with locale
-        $filters = ['locale' => $locale];
-        $assetMedia = $asset->getFirstMedia($asset->getAssetCollection(), $filters);
+        $assetMedia = $asset->getFirstMedia($asset->getAssetCollection(), ['locale' => $locale]);
 
         if (! $assetMedia) {
             // if no media with locale try fallback:

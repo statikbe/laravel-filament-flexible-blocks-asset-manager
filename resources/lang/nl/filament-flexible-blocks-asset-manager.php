@@ -4,8 +4,12 @@ return [
     'asset_nav_lbl' => 'Bestanden',
     'asset_lbl' => 'Bestand',
     'asset_plural_lbl' => 'Bestanden',
-    'form_component.name_lbl' => 'Naam',
-    'form_component.asset_media_lbl' => 'Bestand',
+    'form_component' => [
+        'name_lbl' => 'Naam',
+        'has_custom_file_name_lbl' => 'Aangepaste bestandsnaam voor download',
+        'custom_file_name_lbl' => 'Aangepaste bestandsnaam',
+        'asset_media_lbl' => 'Bestand',
+    ],
     'navigation_group' => 'Instellingen',
     'table' => [
         'extension_lbl' => 'Extensie',
@@ -19,5 +23,6 @@ return [
         'asset_url' => 'Bestand URL',
         'copy' => 'Kopieer',
         'url_copied' => 'URL gekopieerd!',
+        'download' => 'Bestand downloaden',
     ],
 ];
