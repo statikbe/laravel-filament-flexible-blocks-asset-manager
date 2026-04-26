@@ -80,7 +80,7 @@ class FilamentFlexibleBlocksAssetManagerServiceProvider extends PackageServicePr
 
         // Handle Stubs
         if (app()->runningInConsole()) {
-            foreach (app(Filesystem::class)->files(__DIR__.'/../stubs/') as $file) {
+            foreach (app(Filesystem::class)->files(__DIR__ . '/../stubs/') as $file) {
                 $this->publishes([
                     $file->getRealPath() => base_path("stubs/laravel-filament-flexible-blocks-asset-manager/{$file->getFilename()}"),
                 ], 'laravel-filament-flexible-blocks-asset-manager-stubs');

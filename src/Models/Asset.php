@@ -104,10 +104,10 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
         $name = pathinfo($filename, PATHINFO_FILENAME);
 
         if ($filename_extension === $extension || $filename_extension === '') {
-            return $name.'.'.$extension;
+            return $name . '.' . $extension;
         }
 
-        return $name.'.'.$filename_extension.'.'.$extension;
+        return $name . '.' . $filename_extension . '.' . $extension;
     }
 
     public function getPreviewUrl(?string $locale = null): string

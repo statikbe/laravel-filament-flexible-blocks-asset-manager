@@ -27,7 +27,7 @@ class AssetResource extends Resource
 {
     use Translatable;
 
-    protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedPhoto;
+    protected static string | \BackedEnum | null $navigationIcon = Heroicon::OutlinedPhoto;
 
     protected static ?string $recordTitleAttribute = 'name';
 

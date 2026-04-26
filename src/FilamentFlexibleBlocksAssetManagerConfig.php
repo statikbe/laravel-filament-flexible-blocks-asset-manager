@@ -76,6 +76,6 @@ class FilamentFlexibleBlocksAssetManagerConfig
 
     public static function getConfig($key = null, $default = null)
     {
-        return config('filament-flexible-blocks-asset-manager.'.$key, $default);
+        return config('filament-flexible-blocks-asset-manager.' . $key, $default);
     }
 }
