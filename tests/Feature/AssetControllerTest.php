@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Storage;
 use Orchestra\Testbench\Factories\UserFactory;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
@@ -13,17 +14,83 @@ it('returns asset media file successfully', function () {
     $response->assertOk();
 });
 
-it('sets X-Robots-Tag none header on media custom properties', function () {
+it('sets X-Robots-Tag none header on the response', function () {
     setupFakeStorage();
     $asset = createAsset(withMedia: true);
 
     $response = $this->get(route('filament-flexible-blocks-asset-manager.asset_index', ['assetId' => $asset->id]));
 
     $response->assertOk();
-    // The controller calls setCustomHeaders on the media model which stores the
-    // headers as custom properties (used for cloud storage headers like S3).
-    // Spatie's toResponse() does not include them in the HTTP response headers.
+    $response->assertHeader('X-Robots-Tag', 'none');
     $response->assertHeader('Content-Disposition');
+});
+
+it('streams the file content in the response body', function () {
+    setupFakeStorage();
+    $asset = createAsset(withMedia: true);
+
+    $response = $this->get(route('filament-flexible-blocks-asset-manager.asset_index', ['assetId' => $asset->id]));
+
+    $response->assertOk();
+    expect($response->streamedContent())->toBe('test file content');
+});
+
+it('sets Content-Type from the media mime type', function () {
+    setupFakeStorage();
+    $asset = createAsset(withMedia: true);
+    $media = $asset->getFirstMedia($asset->getAssetCollection());
+
+    $response = $this->get(route('filament-flexible-blocks-asset-manager.asset_index', ['assetId' => $asset->id]));
+
+    $response->assertOk();
+    expect($response->headers->get('Content-Type'))->toContain($media->mime_type);
+});
+
+it('sets Content-Disposition inline with the filename', function () {
+    setupFakeStorage();
+    $asset = createAsset(withMedia: true);
+
+    $response = $this->get(route('filament-flexible-blocks-asset-manager.asset_index', ['assetId' => $asset->id]));
+
+    $response->assertOk();
+    expect($response->headers->get('Content-Disposition'))
+        ->toContain('inline')
+        ->toContain('test-file.pdf');
+});
+
+it('sets Content-Length matching the media size', function () {
+    setupFakeStorage();
+    $asset = createAsset(withMedia: true);
+    $media = $asset->getFirstMedia($asset->getAssetCollection());
+
+    $response = $this->get(route('filament-flexible-blocks-asset-manager.asset_index', ['assetId' => $asset->id]));
+
+    $response->assertOk();
+    $response->assertHeader('Content-Length', (string) $media->size);
+});
+
+// Status-level guard test: verifies the 404 short-circuit when readStream() returns
+// null despite exists() being true. Does not exercise the streaming closure body —
+// the streamed-content test above covers the happy path.
+it('returns 404 when readStream returns null despite the file existing', function () {
+    setupFakeStorage();
+    $asset = createAsset(withMedia: true);
+    $media = $asset->getFirstMedia($asset->getAssetCollection());
+
+    Storage::shouldReceive('disk')
+        ->with($media->disk)
+        ->andReturn(Mockery::mock(FilesystemAdapter::class, function ($mock) use ($media) {
+            $mock->shouldReceive('exists')
+                ->with($media->getPathRelativeToRoot())
+                ->andReturn(true);
+            $mock->shouldReceive('readStream')
+                ->with($media->getPathRelativeToRoot())
+                ->andReturn(null);
+        }));
+
+    $response = $this->get(route('filament-flexible-blocks-asset-manager.asset_index', ['assetId' => $asset->id]));
+
+    $response->assertNotFound();
 });
 
 it('returns 404 for non-existent asset', function () {
