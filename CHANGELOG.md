@@ -2,6 +2,24 @@
 
 All notable changes to `laravel-filament-flexible-blocks-asset-manager` will be documented in this file.
 
+## v4.1.0 - 2026-04-28
+
+### What's Changed
+
+* Make asset controller more secure, avoid possible exploits with custom file name and fix streaming download
+* Avoid browser execution of scriptable files. These will be force downloaded.
+* Fix feof() null stream crash and broken response headers in AssetController by @AurelDemiri in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/23
+* Bump ramsey/composer-install from 3 to 4 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/20
+* Bump dependabot/fetch-metadata from 2.5.0 to 3.0.0 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/21
+* Feature/intlar 210 custom file name by @lukasdewijn in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/19
+* Bump dependabot/fetch-metadata from 3.0.0 to 3.1.0 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/22
+
+### New Contributors
+
+* @AurelDemiri made their first contribution in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/23
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/compare/v4.0.2...v4.1.0
+
 ## v4.0.2 - 2026-02-25
 
 ### What's Changed
