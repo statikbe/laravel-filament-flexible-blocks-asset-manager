@@ -17,6 +17,23 @@ class AssetController
 {
     private const STREAM_CHUNK_SIZE = 1024 * 1024;
 
+    /**
+     * Mime types browsers may execute scripts from. Served as attachments so an
+     * attacker-uploaded HTML/SVG cannot run JavaScript on this origin.
+     */
+    private const FORCE_DOWNLOAD_MIME_TYPES = [
+        'text/html',
+        'application/xhtml+xml',
+        'image/svg+xml',
+        'application/javascript',
+        'text/javascript',
+        'application/x-javascript',
+        'application/ecmascript',
+        'text/ecmascript',
+        'text/xml',
+        'application/xml',
+    ];
+
     public function index(Request $request, string $assetId, ?string $locale = null)
     {
         $asset = FilamentFlexibleBlocksAssetManagerConfig::getModel()::findOrFail($assetId);
@@ -58,6 +75,8 @@ class AssetController
 
         $fileName = $asset->getDownloadFileName() ?: $assetMedia->file_name;
         $size = $conversion ? $disk->size($path) : $assetMedia->size;
+        $mimeType = $assetMedia->mime_type ?? 'application/octet-stream';
+        $disposition = $this->shouldForceDownload($mimeType) ? 'attachment' : 'inline';
 
         return new StreamedResponse(function () use ($stream) {
             try {
@@ -71,19 +90,27 @@ class AssetController
                 }
             }
         }, Response::HTTP_OK, [
-            'Content-Type' => $assetMedia->mime_type,
+            'Content-Type' => $mimeType,
             'Content-Length' => $size,
-            'Content-Disposition' => $this->buildContentDisposition($fileName),
+            'Content-Disposition' => $this->buildContentDisposition($disposition, $fileName),
             'Cache-Control' => 'private, no-cache',
+            'X-Content-Type-Options' => 'nosniff',
             'X-Robots-Tag' => 'none',
         ]);
     }
 
-    private function buildContentDisposition(string $fileName): string
+    private function shouldForceDownload(string $mimeType): bool
+    {
+        $normalized = strtolower(trim(explode(';', $mimeType, 2)[0]));
+
+        return in_array($normalized, self::FORCE_DOWNLOAD_MIME_TYPES, true);
+    }
+
+    private function buildContentDisposition(string $disposition, string $fileName): string
     {
         $safeFileName = str_replace(['/', '\\'], '_', $fileName);
 
-        return HeaderUtils::makeDisposition('inline', $safeFileName, Str::ascii($safeFileName));
+        return HeaderUtils::makeDisposition($disposition, $safeFileName, Str::ascii($safeFileName));
     }
 
     private function getAssetMedia(Asset $asset, ?string $locale = null): ?Media
