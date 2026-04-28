@@ -108,9 +108,25 @@ class AssetController
 
     private function buildContentDisposition(string $disposition, string $fileName): string
     {
-        $safeFileName = str_replace(['/', '\\'], '_', $fileName);
+        $safeFileName = $this->sanitizeFilenameForHeader($fileName);
+        $fallback = Str::ascii($safeFileName);
 
-        return HeaderUtils::makeDisposition($disposition, $safeFileName, Str::ascii($safeFileName));
+        try {
+            return HeaderUtils::makeDisposition($disposition, $safeFileName, $fallback);
+        } catch (\InvalidArgumentException) {
+            return HeaderUtils::makeDisposition($disposition, 'file', 'file');
+        }
+    }
+
+    private function sanitizeFilenameForHeader(string $fileName): string
+    {
+        // Strip control chars and Unicode bidirectional overrides (U+202A–U+202E,
+        // U+2066–U+2069, U+200E/F) so an attacker-uploaded filename cannot spoof
+        // the displayed extension in the browser's download UI.
+        $fileName = preg_replace('/[\x00-\x1F\x7F\x{202A}-\x{202E}\x{2066}-\x{2069}\x{200E}\x{200F}]/u', '', $fileName) ?? $fileName;
+
+        // Symfony's makeDisposition rejects "/" and "\".
+        return str_replace(['/', '\\'], '_', $fileName);
     }
 
     private function getAssetMedia(Asset $asset, ?string $locale = null): ?Media

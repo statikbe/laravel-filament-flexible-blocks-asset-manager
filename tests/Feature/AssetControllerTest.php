@@ -216,6 +216,39 @@ it('forces attachment for SVG to prevent stored XSS', function () {
     expect($response->headers->get('Content-Disposition'))->toStartWith('attachment;');
 });
 
+it('strips Unicode bidi overrides from the Content-Disposition filename', function () {
+    setupFakeStorage();
+    $asset = Asset::create(['name' => 'Bidi Asset']);
+    // Filename contains U+202E (RTLO) which a browser would otherwise render
+    // so "fdp.exe" displays as "exe.pdf" — classic extension-spoofing trick.
+    $asset->addMediaFromString('content')
+        ->usingFileName("invoice\u{202E}fdp.pdf")
+        ->toMediaCollection($asset->getAssetCollection());
+
+    $response = $this->get(route('filament-flexible-blocks-asset-manager.asset_index', ['assetId' => $asset->id]));
+
+    $response->assertOk();
+    $disposition = $response->headers->get('Content-Disposition');
+    expect($disposition)
+        ->not->toContain("\u{202E}")
+        ->not->toContain('%E2%80%AE')
+        ->toContain('invoicefdp.pdf');
+});
+
+it('still serves the file when the filename reduces to nothing after sanitization', function () {
+    setupFakeStorage();
+    $asset = Asset::create(['name' => 'Empty After Sanitize']);
+    // Filename made entirely of bidi overrides plus a real extension.
+    $asset->addMediaFromString('content')
+        ->usingFileName("\u{202E}\u{202D}.pdf")
+        ->toMediaCollection($asset->getAssetCollection());
+
+    $response = $this->get(route('filament-flexible-blocks-asset-manager.asset_index', ['assetId' => $asset->id]));
+
+    $response->assertOk();
+    $response->assertHeader('Content-Disposition');
+});
+
 it('uses app locale when translatable and no locale param', function () {
     setupFakeStorage();
     setupTranslatableAssets();
