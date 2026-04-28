@@ -16,7 +16,6 @@ use Filament\Widgets\WidgetsServiceProvider;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
-use RyanChandler\BladeCaptureDirective\BladeCaptureDirectiveServiceProvider;
 use Spatie\MediaLibrary\MediaLibraryServiceProvider;
 use Spatie\Translatable\TranslatableServiceProvider;
 use Statikbe\FilamentFlexibleBlocksAssetManager\FilamentFlexibleBlocksAssetManagerServiceProvider;
@@ -50,7 +49,6 @@ class TestCase extends Orchestra
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
             LivewireServiceProvider::class,
-            BladeCaptureDirectiveServiceProvider::class,
             MediaLibraryServiceProvider::class,
             TranslatableServiceProvider::class,
             FilamentFlexibleContentBlocksServiceProvider::class,
