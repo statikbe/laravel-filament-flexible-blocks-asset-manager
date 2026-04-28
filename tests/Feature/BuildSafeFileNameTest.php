@@ -81,3 +81,45 @@ it('handles a filename with multiple dangerous characters', function () {
 it('handles a filename with accents and dangerous characters', function () {
     expect(Asset::buildSafeFileName('café<script>;alert', 'pdf'))->toBe('caféscriptalert.pdf');
 });
+
+// Unicode bidirectional override stripping (display spoofing protection)
+it('strips right-to-left override (U+202E)', function () {
+    expect(Asset::buildSafeFileName("invoice\u{202E}fdp.exe", 'pdf'))->toBe('invoicefdp.exe.pdf');
+});
+
+it('strips left-to-right override (U+202D)', function () {
+    expect(Asset::buildSafeFileName("file\u{202D}name", 'pdf'))->toBe('filename.pdf');
+});
+
+it('strips directional embedding and pop characters', function () {
+    expect(Asset::buildSafeFileName("a\u{202A}b\u{202B}c\u{202C}d", 'pdf'))->toBe('abcd.pdf');
+});
+
+it('strips directional isolate characters', function () {
+    expect(Asset::buildSafeFileName("a\u{2066}b\u{2067}c\u{2068}d\u{2069}e", 'pdf'))->toBe('abcde.pdf');
+});
+
+it('strips left-to-right and right-to-left marks', function () {
+    expect(Asset::buildSafeFileName("file\u{200E}name\u{200F}", 'pdf'))->toBe('filename.pdf');
+});
+
+// Empty-name fallback
+it('returns null when input is empty', function () {
+    expect(Asset::buildSafeFileName('', 'pdf'))->toBeNull();
+});
+
+it('returns null when input reduces to empty after sanitization', function () {
+    expect(Asset::buildSafeFileName('..', 'pdf'))->toBeNull();
+});
+
+it('returns null when input is only whitespace', function () {
+    expect(Asset::buildSafeFileName('   ', 'pdf'))->toBeNull();
+});
+
+it('returns null when input is only dangerous characters', function () {
+    expect(Asset::buildSafeFileName('<>|;&`', 'pdf'))->toBeNull();
+});
+
+it('returns null when input is only bidi overrides', function () {
+    expect(Asset::buildSafeFileName("\u{202E}\u{202D}", 'pdf'))->toBeNull();
+});

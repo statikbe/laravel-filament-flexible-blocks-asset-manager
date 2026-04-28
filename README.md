@@ -23,6 +23,10 @@ The key features are:
 | v3 | `statikbe/laravel-filament-flexible-blocks-asset-manager:^3.0` | `v3` |
 | v4 & v5 | `statikbe/laravel-filament-flexible-blocks-asset-manager:^4.0` | `main` |
 
+## Upgrades
+
+If you upgrade to v4.1.0, check [the upgrade guide](UPGRADE.md).
+
 ## Installation
 
 You can install the package via composer:

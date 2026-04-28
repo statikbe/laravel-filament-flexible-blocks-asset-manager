@@ -91,17 +91,22 @@ class Asset extends Model implements HasMedia, HasTranslatableMedia, Linkable
             return $media->file_name;
         }
 
-        return $this->buildSafeFileName($this->custom_file_name, $extension);
+        return $this->buildSafeFileName($this->custom_file_name, $extension) ?? $media->file_name;
     }
 
-    public static function buildSafeFileName(string $filename, string $extension): string
+    public static function buildSafeFileName(string $filename, string $extension): ?string
     {
-        // Strip directory traversal and dangerous characters: / \ ; & ` < > NULL |
+        // Strip directory traversal, shell/path metacharacters and Unicode bidirectional
+        // overrides (U+202A–U+202E, U+2066–U+2069, U+200E/F) which can spoof the displayed extension.
         $filename = str_replace('..', '', $filename);
-        $filename = preg_replace('/[\/\\\\;&`<>\x00|]/', '', $filename);
+        $filename = preg_replace('/[\/\\\\;&`<>\x00|\x{202A}-\x{202E}\x{2066}-\x{2069}\x{200E}\x{200F}]/u', '', $filename);
 
         $filename_extension = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
         $name = pathinfo($filename, PATHINFO_FILENAME);
+
+        if (trim($name) === '') {
+            return null;
+        }
 
         if ($filename_extension === $extension || $filename_extension === '') {
             return $name . '.' . $extension;

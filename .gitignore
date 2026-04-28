@@ -13,3 +13,4 @@ testbench.yaml
 vendor
 .phpunit.cache
 .prettierrc
+.claude/settings.local.json
