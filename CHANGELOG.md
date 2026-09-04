@@ -2,6 +2,15 @@
 
 All notable changes to `laravel-filament-flexible-blocks-asset-manager` will be documented in this file.
 
+## v4.1.1 - 2026-07-15
+
+### What's Changed
+
+* Bumped filament dependency to v5 explicitly
+* Bump actions/checkout from 6 to 7 by @dependabot[bot] in https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/pull/24
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/compare/v4.1.0...v4.1.1
+
 ## v4.1.0 - 2026-04-28
 
 ### What's Changed
