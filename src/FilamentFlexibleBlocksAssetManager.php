@@ -2,6 +2,7 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
 
 class FilamentFlexibleBlocksAssetManager
@@ -9,7 +10,7 @@ class FilamentFlexibleBlocksAssetManager
     /**
      * Find the configured asset model by its ID.
      *
-     * @throws \Illuminate\Database\Eloquent\ModelNotFoundException when no asset with the given ID exists.
+     * @throws ModelNotFoundException when no asset with the given ID exists.
      */
     public function findAsset(string | int $assetId): Asset
     {
