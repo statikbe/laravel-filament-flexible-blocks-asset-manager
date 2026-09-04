@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-filament-flexible-blocks-asset-manager` will be documented in this file.
 
+## v4.1.2 - 2026-09-04
+
+Add findAsset helper function
+Add defaults to config
+Fix test
+
+**Full Changelog**: https://github.com/statikbe/laravel-filament-flexible-blocks-asset-manager/compare/v4.1.1...v4.1.2
+
 ## v4.1.1 - 2026-07-15
 
 ### What's Changed
