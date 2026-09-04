@@ -74,7 +74,10 @@ class AssetController
         }
 
         $fileName = $asset->getDownloadFileName() ?: $assetMedia->file_name;
-        $size = $conversion ? $disk->size($path) : $assetMedia->size;
+        // Always measure the file on disk: media-library's `size` column is written at
+        // upload time, so a file replaced out of band would otherwise advertise a
+        // Content-Length that does not match the streamed bytes (ERR_CONTENT_LENGTH_MISMATCH).
+        $size = $disk->size($path);
         $mimeType = $assetMedia->mime_type ?? 'application/octet-stream';
         $disposition = $this->shouldForceDownload($mimeType) ? 'attachment' : 'inline';
 

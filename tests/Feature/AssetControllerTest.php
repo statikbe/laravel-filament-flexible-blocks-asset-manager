@@ -66,7 +66,9 @@ it('sets Content-Length matching the media size', function () {
     $response = $this->get(route('filament-flexible-blocks-asset-manager.asset_index', ['assetId' => $asset->id]));
 
     $response->assertOk();
+    // The stored size and the bytes on disk agree in the normal case.
     $response->assertHeader('Content-Length', (string) $media->size);
+    $response->assertHeader('Content-Length', (string) Storage::disk($media->disk)->size($media->getPathRelativeToRoot()));
 });
 
 // Status-level guard test: verifies the 404 short-circuit when readStream() returns
@@ -206,7 +208,10 @@ it('forces attachment for HTML to prevent stored XSS', function () {
 it('forces attachment for SVG to prevent stored XSS', function () {
     setupFakeStorage();
     $asset = Asset::create(['name' => 'SVG Asset']);
-    $asset->addMediaFromString('<svg xmlns="http://www.w3.org/2000/svg"><script>alert(1)</script></svg>')
+    // Explicit width/height: media-library generates conversions on add, and
+    // ImageMagick's internal MSVG renderer (used when no librsvg delegate is
+    // installed, as on the CI runners) fails with MustSpecifyImageSize otherwise.
+    $asset->addMediaFromString('<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><script>alert(1)</script></svg>')
         ->usingFileName('payload.svg')
         ->toMediaCollection($asset->getAssetCollection());
 
@@ -265,4 +270,21 @@ it('uses app locale when translatable and no locale param', function () {
     ]));
 
     $response->assertOk();
+});
+
+it('sets Content-Length matching the bytes on disk when the stored size is stale', function () {
+    setupFakeStorage();
+    $asset = createAsset(withMedia: true);
+    $media = $asset->getFirstMedia($asset->getAssetCollection());
+
+    // Simulate the file being replaced out of band (backup restore, re-encode,
+    // manual overwrite) without media-library's `size` column being updated.
+    $newContents = 'test file content that is quite a bit longer than before';
+    Storage::disk($media->disk)->put($media->getPathRelativeToRoot(), $newContents);
+
+    $response = $this->get(route('filament-flexible-blocks-asset-manager.asset_index', ['assetId' => $asset->id]));
+
+    $response->assertOk();
+    $response->assertHeader('Content-Length', (string) strlen($newContents));
+    expect($response->streamedContent())->toBe($newContents);
 });
