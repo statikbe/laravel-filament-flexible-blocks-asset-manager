@@ -2,6 +2,9 @@
 
 namespace Statikbe\FilamentFlexibleBlocksAssetManager;
 
+use Statikbe\FilamentFlexibleBlocksAssetManager\Filament\Resources\AssetResource;
+use Statikbe\FilamentFlexibleBlocksAssetManager\Models\Asset;
+
 class FilamentFlexibleBlocksAssetManagerConfig
 {
     public static function hasTranslatableAssets(): bool
@@ -59,14 +62,20 @@ class FilamentFlexibleBlocksAssetManagerConfig
         return self::getConfig('navigation_sort');
     }
 
-    public static function getModel(): ?string
+    /**
+     * @return class-string<Asset>
+     */
+    public static function getModel(): string
     {
-        return self::getConfig('model');
+        return self::getConfig('model', Asset::class);
     }
 
-    public static function getResource(): ?string
+    /**
+     * @return class-string<AssetResource>
+     */
+    public static function getResource(): string
     {
-        return self::getConfig('resource');
+        return self::getConfig('resource', AssetResource::class);
     }
 
     public static function getAssetRoutePrefix(): ?string
